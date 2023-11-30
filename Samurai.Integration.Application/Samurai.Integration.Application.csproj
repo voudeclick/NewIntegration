@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageReleaseNotes>adding temp hc solution for shopify version;</PackageReleaseNotes>
+    <Version>2.0.0-dev</Version>
+    <Configurations>Debug;Release;Production</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Actors\Tray\TrayProcessCategoryMessage.cs" />
+    <Compile Remove="DependencyInjection\DependencyInjectionIntegrationStartup.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Akka" Version="1.3.17" />
+    <PackageReference Include="Akka.Logger.Serilog" Version="1.3.10" />
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.6" />
+    <PackageReference Include="Serilog" Version="2.9.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
+    <PackageReference Include="Serilog.Sinks.AzureAnalytics" Version="4.6.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Samurai.Integration.APIClient\Samurai.Integration.APIClient.csproj" />
+    <ProjectReference Include="..\Samurai.Integration.Domain\Samurai.Integration.Domain.csproj" />
+    <ProjectReference Include="..\Samurai.Integration.Email\Samurai.Integration.Email.csproj" />
+    <ProjectReference Include="..\Samurai.Integration.EntityFramework\Samurai.Integration.EntityFramework.csproj" />
+  </ItemGroup>
+
+</Project>

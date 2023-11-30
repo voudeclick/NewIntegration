@@ -1,0 +1,63 @@
+﻿.login-container {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.login-logo {
+    position: relative;
+    margin-left: -40%;
+}
+
+    .login-logo i {
+        position: absolute;
+        width: 19%;
+        margin-top: 2%;
+        background: #155c9d;
+        border-radius: 4.5rem;
+        padding: 5%;
+    }
+
+.login-form-1 {
+    padding: 9%;
+    background: #155c9d;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+    .login-form-1 h3 {
+        text-align: center;
+        margin-bottom: 6%;
+        color: #fff;
+    }
+
+.login-form-2 {
+    padding: 9%;
+    background: #464748;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+    .login-form-2 h3 {
+        text-align: center;
+        margin-bottom: 6%;
+        color: #fff;
+    }
+
+.form-ecommerce, .form-erp {
+    text-align: center;
+    padding-left: 60px;
+    padding-right: 60px;
+    color: #fff;
+}
+
+input.ng-invalid {
+    background-color: #FADEE4;
+    border: solid 1px red;
+}
+
+
+select.ng-invalid {
+    border: solid 1px red;
+}
+
+.div-align div{
+    width:300px;    
+}

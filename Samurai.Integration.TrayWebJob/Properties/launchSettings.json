@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Samurai.Integration.TrayWebJob": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

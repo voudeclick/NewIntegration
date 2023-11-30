@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="integration-web-api" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\SI\\lucassamurai-samurai\.integration-e27d64729d29\\Samurai\.Integration\.OmieWebJob\\obj\\Release\\netcoreapp3\.1\\PubTmp\\Out\\$" />
+  </parameter>
+</parameters>

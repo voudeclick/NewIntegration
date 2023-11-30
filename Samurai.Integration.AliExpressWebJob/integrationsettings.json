@@ -1,0 +1,13 @@
+{
+  "Messages": [
+    {
+      "OriginMessageTypeFullName": "TrayApp.Domain.Models.SamuraiIntegrations.DTOs.OrderMessageDTO",
+      "DestinyMessageTypeFullName": "Samurai.Integration.Domain.Messages.AliExpress.Order.AliExpressGetOrderMessage"
+    },
+    {
+      "OriginMessageTypeFullName": "TrayApp.Domain.Models.SamuraiIntegrations.DTOs.OrderMessageTrackingDTO",
+      "DestinyMessageTypeFullName": "Samurai.Integration.Domain.Messages.AliExpress.Order.AliExpressGetOrderTrackingMessage"
+    },
+
+  ]
+}

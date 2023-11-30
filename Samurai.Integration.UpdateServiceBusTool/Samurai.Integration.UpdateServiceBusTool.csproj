@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Configurations>Debug;Release;Production</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Samurai.Integration.APIClient\Samurai.Integration.APIClient.csproj" />
+    <ProjectReference Include="..\Samurai.Integration.Application\Samurai.Integration.Application.csproj" />
+    <ProjectReference Include="..\Samurai.Integration.Domain\Samurai.Integration.Domain.csproj" />
+    <ProjectReference Include="..\Samurai.Integration.EntityFramework\Samurai.Integration.EntityFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.Production.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>appsettings.json</DependentUpon>
+    </Content>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.Development.json;">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>appsettings.json</DependentUpon>
+    </Content>
+    <Content Include="appsettings.Sandbox.json;">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>appsettings.json</DependentUpon>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.5" />
+  </ItemGroup>
+
+</Project>

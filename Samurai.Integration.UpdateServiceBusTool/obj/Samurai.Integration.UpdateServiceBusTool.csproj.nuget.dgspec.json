@@ -1,0 +1,649 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\dev\\NewIntegration\\Samurai.Integration.UpdateServiceBusTool\\Samurai.Integration.UpdateServiceBusTool.csproj": {}
+  },
+  "projects": {
+    "C:\\dev\\NewIntegration\\Samurai.Integration.APIClient\\Samurai.Integration.APIClient.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\dev\\NewIntegration\\Samurai.Integration.APIClient\\Samurai.Integration.APIClient.csproj",
+        "projectName": "Samurai.Integration.APIClient",
+        "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.APIClient\\Samurai.Integration.APIClient.csproj",
+        "packagesPath": "C:\\Users\\flavi\\.nuget\\packages\\",
+        "outputPath": "C:\\dev\\NewIntegration\\Samurai.Integration.APIClient\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\flavi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\dev\\NewIntegration\\Samurai.Integration.Domain\\Samurai.Integration.Domain.csproj": {
+                "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.Domain\\Samurai.Integration.Domain.csproj"
+              },
+              "C:\\dev\\NewIntegration\\Samurai.Integration.EntityFramework\\Samurai.Integration.EntityFramework.csproj": {
+                "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.EntityFramework\\Samurai.Integration.EntityFramework.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Akka": {
+              "target": "Package",
+              "version": "[1.3.17, )"
+            },
+            "Microsoft.AspNetCore.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
+            "Microsoft.AspNetCore.WebUtilities": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Azure.ServiceBus": {
+              "target": "Package",
+              "version": "[4.1.1, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Polly": {
+              "target": "Package",
+              "version": "[7.2.2, )"
+            },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[107.3.0, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[2.9.0, )"
+            },
+            "System.Runtime.Extensions": {
+              "target": "Package",
+              "version": "[4.3.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\dev\\NewIntegration\\Samurai.Integration.Application\\Samurai.Integration.Application.csproj": {
+      "version": "2.0.0-dev",
+      "restore": {
+        "projectUniqueName": "C:\\dev\\NewIntegration\\Samurai.Integration.Application\\Samurai.Integration.Application.csproj",
+        "projectName": "Samurai.Integration.Application",
+        "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.Application\\Samurai.Integration.Application.csproj",
+        "packagesPath": "C:\\Users\\flavi\\.nuget\\packages\\",
+        "outputPath": "C:\\dev\\NewIntegration\\Samurai.Integration.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\flavi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\dev\\NewIntegration\\Samurai.Integration.APIClient\\Samurai.Integration.APIClient.csproj": {
+                "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.APIClient\\Samurai.Integration.APIClient.csproj"
+              },
+              "C:\\dev\\NewIntegration\\Samurai.Integration.Domain\\Samurai.Integration.Domain.csproj": {
+                "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.Domain\\Samurai.Integration.Domain.csproj"
+              },
+              "C:\\dev\\NewIntegration\\Samurai.Integration.Email\\Samurai.Integration.Email.csproj": {
+                "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.Email\\Samurai.Integration.Email.csproj"
+              },
+              "C:\\dev\\NewIntegration\\Samurai.Integration.EntityFramework\\Samurai.Integration.EntityFramework.csproj": {
+                "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.EntityFramework\\Samurai.Integration.EntityFramework.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Akka": {
+              "target": "Package",
+              "version": "[1.3.17, )"
+            },
+            "Akka.Logger.Serilog": {
+              "target": "Package",
+              "version": "[1.3.10, )"
+            },
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            },
+            "Microsoft.AspNetCore.WebUtilities": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[2.9.0, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Serilog.Settings.Configuration": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Serilog.Sinks.ApplicationInsights": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Serilog.Sinks.Async": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
+            "Serilog.Sinks.AzureAnalytics": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\dev\\NewIntegration\\Samurai.Integration.Domain\\Samurai.Integration.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\dev\\NewIntegration\\Samurai.Integration.Domain\\Samurai.Integration.Domain.csproj",
+        "projectName": "Samurai.Integration.Domain",
+        "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.Domain\\Samurai.Integration.Domain.csproj",
+        "packagesPath": "C:\\Users\\flavi\\.nuget\\packages\\",
+        "outputPath": "C:\\dev\\NewIntegration\\Samurai.Integration.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\flavi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Akka": {
+              "target": "Package",
+              "version": "[1.3.17, )"
+            },
+            "ByteSize": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.Azure.ServiceBus": {
+              "target": "Package",
+              "version": "[4.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\dev\\NewIntegration\\Samurai.Integration.Email\\Samurai.Integration.Email.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\dev\\NewIntegration\\Samurai.Integration.Email\\Samurai.Integration.Email.csproj",
+        "projectName": "Samurai.Integration.Email",
+        "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.Email\\Samurai.Integration.Email.csproj",
+        "packagesPath": "C:\\Users\\flavi\\.nuget\\packages\\",
+        "outputPath": "C:\\dev\\NewIntegration\\Samurai.Integration.Email\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\flavi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\dev\\NewIntegration\\Samurai.Integration.Domain\\Samurai.Integration.Domain.csproj": {
+                "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.Domain\\Samurai.Integration.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            },
+            "Microsoft.Extensions.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\dev\\NewIntegration\\Samurai.Integration.EntityFramework\\Samurai.Integration.EntityFramework.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\dev\\NewIntegration\\Samurai.Integration.EntityFramework\\Samurai.Integration.EntityFramework.csproj",
+        "projectName": "Samurai.Integration.EntityFramework",
+        "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.EntityFramework\\Samurai.Integration.EntityFramework.csproj",
+        "packagesPath": "C:\\Users\\flavi\\.nuget\\packages\\",
+        "outputPath": "C:\\dev\\NewIntegration\\Samurai.Integration.EntityFramework\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\flavi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\dev\\NewIntegration\\Samurai.Integration.Domain\\Samurai.Integration.Domain.csproj": {
+                "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.Domain\\Samurai.Integration.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Canducci.Pagination": {
+              "target": "Package",
+              "version": "[2.1.2, )"
+            },
+            "Microsoft.Azure.WebJobs.Extensions": {
+              "target": "Package",
+              "version": "[3.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.Extensions.Caching.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.Extensions.Logging.Console": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\dev\\NewIntegration\\Samurai.Integration.UpdateServiceBusTool\\Samurai.Integration.UpdateServiceBusTool.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\dev\\NewIntegration\\Samurai.Integration.UpdateServiceBusTool\\Samurai.Integration.UpdateServiceBusTool.csproj",
+        "projectName": "Samurai.Integration.UpdateServiceBusTool",
+        "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.UpdateServiceBusTool\\Samurai.Integration.UpdateServiceBusTool.csproj",
+        "packagesPath": "C:\\Users\\flavi\\.nuget\\packages\\",
+        "outputPath": "C:\\dev\\NewIntegration\\Samurai.Integration.UpdateServiceBusTool\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\flavi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\dev\\NewIntegration\\Samurai.Integration.APIClient\\Samurai.Integration.APIClient.csproj": {
+                "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.APIClient\\Samurai.Integration.APIClient.csproj"
+              },
+              "C:\\dev\\NewIntegration\\Samurai.Integration.Application\\Samurai.Integration.Application.csproj": {
+                "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.Application\\Samurai.Integration.Application.csproj"
+              },
+              "C:\\dev\\NewIntegration\\Samurai.Integration.Domain\\Samurai.Integration.Domain.csproj": {
+                "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.Domain\\Samurai.Integration.Domain.csproj"
+              },
+              "C:\\dev\\NewIntegration\\Samurai.Integration.EntityFramework\\Samurai.Integration.EntityFramework.csproj": {
+                "projectPath": "C:\\dev\\NewIntegration\\Samurai.Integration.EntityFramework\\Samurai.Integration.EntityFramework.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.Extensions.Logging.Console": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.31, 3.1.31]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

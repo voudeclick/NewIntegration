@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Samurai.Integration.NexaasWebJob": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Samurai.Integration.BlingWebJob": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

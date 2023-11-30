@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = Samurai.Integration.UpdateServiceBusTool
+build_property.ProjectDir = C:\dev\NewIntegration\Samurai.Integration.UpdateServiceBusTool\

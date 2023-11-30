@@ -1,0 +1,8 @@
+{
+  "Messages": [
+    {
+      "OriginMessageTypeFullName": "TrayApp.Domain.Models.SamuraiIntegrations.DTOs.ProductWrapperDTO",
+      "DestinyMessageTypeFullName": "Samurai.Integration.Domain.Messages.Tray.ProductActor.TrayProcessProductMessage"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Configurations>Debug;Release;Production</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20210127214356_AddTableLocationMap.cs" />
+    <Compile Remove="Migrations\20210127214356_AddTableLocationMap.Designer.cs" />
+    <Compile Remove="Migrations\20210127231048_AddTableLocationMap.cs" />
+    <Compile Remove="Migrations\20210127231048_AddTableLocationMap.Designer.cs" />
+    <Compile Remove="Migrations\20210614195859_AddColumnNameFieldOnOmieData.cs" />
+    <Compile Remove="Migrations\20210614195859_AddColumnNameFieldOnOmieData.Designer.cs" />
+    <Compile Remove="Migrations\20210622130253_AddColumnOrderFieldOnBlingData.cs" />
+    <Compile Remove="Migrations\20210622130253_AddColumnOrderFieldOnBlingData.Designer.cs" />
+    <Compile Remove="Migrations\20210823183909_AddFulfillmentNotificationSettingTenantMigration.cs" />
+    <Compile Remove="Migrations\20210823183909_AddFulfillmentNotificationSettingTenantMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210831150106_AddillenniumLastUpdateDateAtMillenniumTransId.cs" />
+    <Compile Remove="Migrations\20210831150106_AddillenniumLastUpdateDateAtMillenniumTransId.Designer.cs" />
+    <Compile Remove="Migrations\20210913125457_AddIntegrationInfosStockMigration.cs" />
+    <Compile Remove="Migrations\20210913125457_AddIntegrationInfosStockMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210913125604_AddIntegrationInfosStockMigration.cs" />
+    <Compile Remove="Migrations\20210913125604_AddIntegrationInfosStockMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210913183604_FixFieldOfConfigsPriceMillennium.cs" />
+    <Compile Remove="Migrations\20210913183604_FixFieldOfConfigsPriceMillennium.Designer.cs" />
+    <Compile Remove="Migrations\20210913184113_AddNoteConsiderProductIfPriceIsZeroConfig.cs" />
+    <Compile Remove="Migrations\20210913184113_AddNoteConsiderProductIfPriceIsZeroConfig.Designer.cs" />
+    <Compile Remove="Migrations\20210914164250_AddMillenniumNewStockProcessMigration.cs" />
+    <Compile Remove="Migrations\20210914164250_AddMillenniumNewStockProcessMigration.Designer.cs" />
+    <Compile Remove="Migrations\20211020172414_UpdateStockProcessMillennium.cs" />
+    <Compile Remove="Migrations\20211020172414_UpdateStockProcessMillennium.Designer.cs" />
+    <Compile Remove="Migrations\20211020173651_UpdateStockProcessMillenniumEdit.cs" />
+    <Compile Remove="Migrations\20211020173651_UpdateStockProcessMillenniumEdit.Designer.cs" />
+    <Compile Remove="Migrations\20211020175115_UpdateStockProcessMillenniumEdit2.cs" />
+    <Compile Remove="Migrations\20211020175115_UpdateStockProcessMillenniumEdit2.Designer.cs" />
+    <Compile Remove="Migrations\20211020175645_UpdateStockProcessMillenniumEdit3.cs" />
+    <Compile Remove="Migrations\20211020175645_UpdateStockProcessMillenniumEdit3.Designer.cs" />
+    <Compile Remove="Migrations\20211020180048_UpdateStockProcess.cs" />
+    <Compile Remove="Migrations\20211020180048_UpdateStockProcess.Designer.cs" />
+    <Compile Remove="Migrations\20211103173141_UpOmieIntToLong.cs" />
+    <Compile Remove="Migrations\20211103173141_UpOmieIntToLong.Designer.cs" />
+    <Compile Remove="Migrations\20211103173812_UpOmieIntToLong.cs" />
+    <Compile Remove="Migrations\20211103173812_UpOmieIntToLong.Designer.cs" />
+    <Compile Remove="Migrations\20220301154339_createTableDeParaPayment.cs" />
+    <Compile Remove="Migrations\20220301154339_createTableDeParaPayment.Designer.cs" />
+    <Compile Remove="Migrations\20220422151319_CreateTableParams.cs" />
+    <Compile Remove="Migrations\20220422151319_CreateTableParams.Designer.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Canducci.Pagination" Version="2.1.2" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions" Version="3.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Samurai.Integration.Domain\Samurai.Integration.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

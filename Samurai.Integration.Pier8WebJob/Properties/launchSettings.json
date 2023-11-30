@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Samurai.Integration.Pier8WebJob": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

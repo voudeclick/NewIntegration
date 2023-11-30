@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Samurai.Integration.AliExpressWebJob": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

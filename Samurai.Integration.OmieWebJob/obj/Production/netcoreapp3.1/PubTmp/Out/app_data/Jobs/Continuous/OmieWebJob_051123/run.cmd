@@ -1,0 +1,1 @@
+dotnet Samurai.Integration.OmieWebJob.dll %*

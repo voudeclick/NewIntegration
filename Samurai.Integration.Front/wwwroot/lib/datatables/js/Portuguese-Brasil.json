@@ -1,0 +1,24 @@
+{
+  "sEmptyTable": "Nenhum registro encontrado",
+  "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ Registros",
+  "sInfoEmpty": "Mostrando 0 até 0 de 0 Registros",
+  "sInfoFiltered": "(Filtrados de _MAX_ Registros)",
+  "sInfoPostFix": "",
+  "sInfoThousands": ".",
+  "sLengthMenu": "_MENU_ Resultados por página",
+  "sLoadingRecords": "Carregando...",
+  "sProcessing": "Processando...",
+  "sZeroRecords": "Nenhum registro encontrado",
+  "sSearch": "",
+  "sSearchPlaceholder": "Pesquise por ID, Loja, ERP ou Plataforma",
+  "oPaginate": {
+    "sNext": "Próximo",
+    "sPrevious": "Anterior",
+    "sFirst": "Primeiro",
+    "sLast": "Último"
+  },
+  "oAria": {
+    "sSortAscending": ": Ordenar colunas de forma ascendente",
+    "sSortDescending": ": Ordenar colunas de forma descendente"
+  }
+}

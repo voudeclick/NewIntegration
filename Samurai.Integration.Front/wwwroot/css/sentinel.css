@@ -1,0 +1,114 @@
+﻿.accordionLoad {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+    .accordionLoad div {
+        border: 1px solid rgb(222, 226, 230);
+        height: 4rem;
+        width: inherit;
+        border-radius: 3px;
+        background: linear-gradient(100deg, #cad1d6, #828587, #cad1d6);
+        background-size: 800% 600%;
+        animation: colors 2s ease infinite;
+        transition: all 2s ease;
+    }
+
+@keyframes colors {
+    100% {
+        background-position: 0%;
+    }
+
+    0% {
+        background-position: 100%;
+    }
+}
+
+
+.orientation-buttons-center {
+    width: 100%;
+    padding: 10rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    transition: all 2s ease;
+}
+
+.btn-center {
+    width: 15rem;
+    height: 5rem;
+    border-radius: 5px;
+    border: solid 1px #1545cb;
+    font-size: 1.5rem;
+    color: #ffffff;
+    padding: 20px;
+    position: relative;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all 2s ease;
+    outline: none;
+}
+
+
+
+.btn-efeito {
+    background: #1545cb;
+}
+
+    .btn-efeito:before {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 0px;
+        height: inherit;
+        background: rgba(255,255,255,0.3);
+        border-radius: 5px;
+        transition: all 2s ease;
+    }
+
+    .btn-efeito:hover:before {
+        width: 100%;
+    }
+
+.orientation-buttons-top {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 2s ease;
+}
+
+.top-right {
+    width: 5rem;
+    height: 2rem;
+    border-radius: 5px;
+    border: solid 1px #1545cb;
+    font-size: 1rem;
+    color: #ffffff;
+    position: relative;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all 2s ease;
+    outline: none;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f4f4f4;
+}
+
+::-webkit-scrollbar {
+    width: 1px;
+    height: 7px;
+    background: #f4f4f4;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(222, 226, 230);
+}

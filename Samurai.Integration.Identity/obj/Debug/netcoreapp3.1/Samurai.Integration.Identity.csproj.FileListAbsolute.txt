@@ -1,0 +1,13 @@
+C:\SI\Integration-mercado-pago\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\bin\Debug\netcoreapp3.1\Samurai.Integration.Identity.deps.json
+C:\SI\Integration-mercado-pago\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\bin\Debug\netcoreapp3.1\Samurai.Integration.Identity.dll
+C:\SI\Integration-mercado-pago\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\bin\Debug\netcoreapp3.1\Samurai.Integration.Identity.pdb
+C:\SI\Integration-mercado-pago\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\bin\Debug\netcoreapp3.1\Samurai.Integration.Domain.dll
+C:\SI\Integration-mercado-pago\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\bin\Debug\netcoreapp3.1\Samurai.Integration.Domain.pdb
+C:\SI\Integration-mercado-pago\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\obj\Debug\netcoreapp3.1\Samurai.Integration.Identity.csproj.AssemblyReference.cache
+C:\SI\Integration-mercado-pago\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\obj\Debug\netcoreapp3.1\Samurai.Integration.Identity.GeneratedMSBuildEditorConfig.editorconfig
+C:\SI\Integration-mercado-pago\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\obj\Debug\netcoreapp3.1\Samurai.Integration.Identity.AssemblyInfoInputs.cache
+C:\SI\Integration-mercado-pago\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\obj\Debug\netcoreapp3.1\Samurai.Integration.Identity.AssemblyInfo.cs
+C:\SI\Integration-mercado-pago\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\obj\Debug\netcoreapp3.1\Samurai.Integration.Identity.csproj.CoreCompileInputs.cache
+C:\SI\Integration-mercado-pago\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\obj\Debug\netcoreapp3.1\Samurai.Integration.Identity.csproj.CopyComplete
+C:\SI\Integration-mercado-pago\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\obj\Debug\netcoreapp3.1\Samurai.Integration.Identity.dll
+C:\SI\Integration-mercado-pago\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\obj\Debug\netcoreapp3.1\Samurai.Integration.Identity.pdb
