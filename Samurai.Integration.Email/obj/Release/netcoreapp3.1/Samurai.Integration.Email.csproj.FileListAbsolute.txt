@@ -24,3 +24,16 @@ C:\SI\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Email\ob
 C:\SI\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Email\obj\Release\netcoreapp3.1\Samurai.Integration.Email.csproj.CopyComplete
 C:\SI\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Email\obj\Release\netcoreapp3.1\Samurai.Integration.Email.dll
 C:\SI\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Email\obj\Release\netcoreapp3.1\Samurai.Integration.Email.pdb
+C:\dev\NewIntegration\Samurai.Integration.Email\bin\Release\netcoreapp3.1\Samurai.Integration.Email.deps.json
+C:\dev\NewIntegration\Samurai.Integration.Email\bin\Release\netcoreapp3.1\Samurai.Integration.Email.dll
+C:\dev\NewIntegration\Samurai.Integration.Email\bin\Release\netcoreapp3.1\Samurai.Integration.Email.pdb
+C:\dev\NewIntegration\Samurai.Integration.Email\bin\Release\netcoreapp3.1\Samurai.Integration.Domain.dll
+C:\dev\NewIntegration\Samurai.Integration.Email\bin\Release\netcoreapp3.1\Samurai.Integration.Domain.pdb
+C:\dev\NewIntegration\Samurai.Integration.Email\obj\Release\netcoreapp3.1\Samurai.Integration.Email.csproj.AssemblyReference.cache
+C:\dev\NewIntegration\Samurai.Integration.Email\obj\Release\netcoreapp3.1\Samurai.Integration.Email.GeneratedMSBuildEditorConfig.editorconfig
+C:\dev\NewIntegration\Samurai.Integration.Email\obj\Release\netcoreapp3.1\Samurai.Integration.Email.AssemblyInfoInputs.cache
+C:\dev\NewIntegration\Samurai.Integration.Email\obj\Release\netcoreapp3.1\Samurai.Integration.Email.AssemblyInfo.cs
+C:\dev\NewIntegration\Samurai.Integration.Email\obj\Release\netcoreapp3.1\Samurai.Integration.Email.csproj.CoreCompileInputs.cache
+C:\dev\NewIntegration\Samurai.Integration.Email\obj\Release\netcoreapp3.1\Samurai.Integration.Email.csproj.CopyComplete
+C:\dev\NewIntegration\Samurai.Integration.Email\obj\Release\netcoreapp3.1\Samurai.Integration.Email.dll
+C:\dev\NewIntegration\Samurai.Integration.Email\obj\Release\netcoreapp3.1\Samurai.Integration.Email.pdb

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "z4lNXiHn5+2QLwCpmEBZF7/KNXKG2pAxso6tK9grq1AFGq1UUeVGYkM7lfjIDSnD3iyVaiqs8NPFLTsDpp6Nbw==",
+  "dgSpecHash": "nFio1sH4NEekDXUx9n5Q40iIysbLrAW7CnTbQzp4hi9JHholD2v8xl0o27Bl/MAH7BvYeBuGau3tZDL46wd/3w==",
   "success": true,
   "projectFilePath": "C:\\dev\\NewIntegration\\Samurai.Integration.Pier8WebJob\\Samurai.Integration.Pier8WebJob.csproj",
   "expectedPackageFiles": [
@@ -215,11 +215,7 @@
     "C:\\Users\\flavi\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\flavi\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\flavi\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\windowsazure.storage\\9.3.1\\windowsazure.storage.9.3.1.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.31\\microsoft.netcore.app.host.win-x64.3.1.31.nupkg.sha512"
+    "C:\\Users\\flavi\\.nuget\\packages\\windowsazure.storage\\9.3.1\\windowsazure.storage.9.3.1.nupkg.sha512"
   ],
   "logs": []
 }

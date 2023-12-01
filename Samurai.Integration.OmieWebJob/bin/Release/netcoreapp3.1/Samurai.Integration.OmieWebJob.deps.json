@@ -19,12 +19,10 @@
           "Samurai.Integration.APIClient": "1.0.0",
           "Samurai.Integration.Application": "2.0.0-dev",
           "Samurai.Integration.NexaasWebJob": "1.0.0",
-          "Serilog": "2.9.0",
+          "Serilog": "3.1.1",
           "Serilog.Extensions.Logging": "3.0.1",
           "Serilog.Settings.Configuration": "3.1.0",
-          "Serilog.Sinks.ApplicationInsights": "3.1.0",
-          "Serilog.Sinks.Async": "1.4.0",
-          "Serilog.Sinks.Console": "3.1.1"
+          "Serilog.Sinks.ApplicationInsights": "4.0.0"
         },
         "runtime": {
           "Samurai.Integration.OmieWebJob.dll": {}
@@ -53,7 +51,7 @@
         "dependencies": {
           "Akka": "1.3.17",
           "NETStandard.Library": "1.6.1",
-          "Serilog": "2.9.0"
+          "Serilog": "3.1.1"
         },
         "runtime": {
           "lib/netstandard1.6/Akka.Logger.Serilog.dll": {
@@ -121,21 +119,20 @@
           }
         }
       },
-      "Microsoft.ApplicationInsights/2.12.0": {
+      "Microsoft.ApplicationInsights/2.20.0": {
         "dependencies": {
-          "System.Diagnostics.DiagnosticSource": "4.7.0",
-          "System.Runtime.InteropServices": "4.3.0"
+          "System.Diagnostics.DiagnosticSource": "7.0.2"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.ApplicationInsights.dll": {
-            "assemblyVersion": "2.12.0.21496",
-            "fileVersion": "2.12.0.21496"
+            "assemblyVersion": "2.20.0.103",
+            "fileVersion": "2.20.0.103"
           }
         }
       },
       "Microsoft.ApplicationInsights.AspNetCore/2.8.0": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "2.12.0",
+          "Microsoft.ApplicationInsights": "2.20.0",
           "Microsoft.ApplicationInsights.DependencyCollector": "2.11.0",
           "Microsoft.ApplicationInsights.EventCounterCollector": "2.11.0",
           "Microsoft.ApplicationInsights.PerfCounterCollector": "2.11.0",
@@ -144,7 +141,7 @@
           "Microsoft.AspNetCore.Hosting": "1.0.2",
           "Microsoft.Extensions.Configuration.Json": "3.1.1",
           "Microsoft.Extensions.Logging.ApplicationInsights": "2.11.0",
-          "System.Diagnostics.DiagnosticSource": "4.7.0",
+          "System.Diagnostics.DiagnosticSource": "7.0.2",
           "System.Net.NameResolution": "4.3.0",
           "System.Text.Encodings.Web": "4.5.0"
         },
@@ -157,11 +154,11 @@
       },
       "Microsoft.ApplicationInsights.DependencyCollector/2.11.0": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "2.12.0",
+          "Microsoft.ApplicationInsights": "2.20.0",
           "Microsoft.Extensions.DiagnosticAdapter": "1.1.0",
           "Microsoft.Extensions.PlatformAbstractions": "1.1.0",
           "System.Data.SqlClient": "4.3.1",
-          "System.Diagnostics.DiagnosticSource": "4.7.0",
+          "System.Diagnostics.DiagnosticSource": "7.0.2",
           "System.Diagnostics.StackTrace": "4.3.0"
         },
         "runtime": {
@@ -173,7 +170,7 @@
       },
       "Microsoft.ApplicationInsights.EventCounterCollector/2.11.0": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "2.12.0"
+          "Microsoft.ApplicationInsights": "2.20.0"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.AI.EventCounterCollector.dll": {
@@ -184,7 +181,7 @@
       },
       "Microsoft.ApplicationInsights.PerfCounterCollector/2.11.0": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "2.12.0",
+          "Microsoft.ApplicationInsights": "2.20.0",
           "Microsoft.Extensions.Caching.Memory": "3.1.1",
           "Microsoft.Extensions.PlatformAbstractions": "1.1.0",
           "System.Diagnostics.PerformanceCounter": "4.5.0",
@@ -201,8 +198,8 @@
       },
       "Microsoft.ApplicationInsights.SnapshotCollector/1.3.4": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "2.12.0",
-          "System.Diagnostics.DiagnosticSource": "4.7.0"
+          "Microsoft.ApplicationInsights": "2.20.0",
+          "System.Diagnostics.DiagnosticSource": "7.0.2"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.ApplicationInsights.SnapshotCollector.dll": {
@@ -213,11 +210,11 @@
       },
       "Microsoft.ApplicationInsights.WindowsServer/2.11.0": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "2.12.0",
+          "Microsoft.ApplicationInsights": "2.20.0",
           "Microsoft.ApplicationInsights.DependencyCollector": "2.11.0",
           "Microsoft.ApplicationInsights.PerfCounterCollector": "2.11.0",
           "Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel": "2.11.0",
-          "System.Diagnostics.DiagnosticSource": "4.7.0",
+          "System.Diagnostics.DiagnosticSource": "7.0.2",
           "System.Runtime.Serialization.Json": "4.3.0",
           "System.Runtime.Serialization.Primitives": "4.3.0"
         },
@@ -230,7 +227,7 @@
       },
       "Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel/2.11.0": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "2.12.0",
+          "Microsoft.ApplicationInsights": "2.20.0",
           "Newtonsoft.Json": "11.0.2",
           "System.IO.FileSystem.AccessControl": "4.5.0"
         },
@@ -305,7 +302,7 @@
           "Microsoft.Extensions.Options": "3.1.6",
           "Microsoft.Extensions.PlatformAbstractions": "1.1.0",
           "System.Console": "4.3.0",
-          "System.Diagnostics.DiagnosticSource": "4.7.0",
+          "System.Diagnostics.DiagnosticSource": "7.0.2",
           "System.Diagnostics.StackTrace": "4.3.0",
           "System.Reflection.Extensions": "4.3.0",
           "System.Reflection.Metadata": "1.4.1",
@@ -422,7 +419,7 @@
           "Microsoft.Extensions.DependencyModel": "2.1.0",
           "Microsoft.Extensions.FileProviders.Abstractions": "3.1.6",
           "Microsoft.Extensions.Logging.Abstractions": "3.1.6",
-          "System.Diagnostics.DiagnosticSource": "4.7.0",
+          "System.Diagnostics.DiagnosticSource": "7.0.2",
           "System.Threading.Tasks.Extensions": "4.5.1"
         },
         "runtime": {
@@ -498,7 +495,7 @@
           "Microsoft.Azure.Amqp": "2.4.2",
           "Microsoft.Azure.Services.AppAuthentication": "1.0.3",
           "Newtonsoft.Json": "11.0.2",
-          "System.Diagnostics.DiagnosticSource": "4.7.0",
+          "System.Diagnostics.DiagnosticSource": "7.0.2",
           "System.IdentityModel.Tokens.Jwt": "5.4.0"
         },
         "runtime": {
@@ -593,7 +590,7 @@
       },
       "Microsoft.Azure.WebJobs.Logging.ApplicationInsights/3.0.14": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "2.12.0",
+          "Microsoft.ApplicationInsights": "2.20.0",
           "Microsoft.ApplicationInsights.AspNetCore": "2.8.0",
           "Microsoft.ApplicationInsights.DependencyCollector": "2.11.0",
           "Microsoft.ApplicationInsights.PerfCounterCollector": "2.11.0",
@@ -695,7 +692,7 @@
           "Microsoft.Extensions.Logging": "3.1.6",
           "System.Collections.Immutable": "1.7.0",
           "System.ComponentModel.Annotations": "4.7.0",
-          "System.Diagnostics.DiagnosticSource": "4.7.0"
+          "System.Diagnostics.DiagnosticSource": "7.0.2"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.dll": {
@@ -915,7 +912,7 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.6",
           "NETStandard.Library": "1.6.1",
           "System.ComponentModel": "4.3.0",
-          "System.Diagnostics.DiagnosticSource": "4.7.0",
+          "System.Diagnostics.DiagnosticSource": "7.0.2",
           "System.Reflection.Emit": "4.7.0",
           "System.Reflection.Emit.Lightweight": "4.3.0"
         },
@@ -1030,7 +1027,7 @@
       },
       "Microsoft.Extensions.Logging.ApplicationInsights/2.11.0": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "2.12.0",
+          "Microsoft.ApplicationInsights": "2.20.0",
           "Microsoft.Extensions.Logging": "3.1.6"
         },
         "runtime": {
@@ -1289,7 +1286,7 @@
         "dependencies": {
           "Portable.BouncyCastle": "1.9.0",
           "System.Buffers": "4.5.1",
-          "System.Memory": "4.5.4",
+          "System.Memory": "4.5.5",
           "System.Security.Cryptography.Pkcs": "4.7.0",
           "System.Text.Encoding.CodePages": "4.5.1"
         },
@@ -1487,11 +1484,14 @@
           }
         }
       },
-      "Serilog/2.9.0": {
+      "Serilog/3.1.1": {
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "7.0.2"
+        },
         "runtime": {
-          "lib/netstandard2.0/Serilog.dll": {
+          "lib/netstandard2.1/Serilog.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.9.0.0"
+            "fileVersion": "3.1.1.0"
           }
         }
       },
@@ -1500,7 +1500,7 @@
           "Microsoft.AspNetCore.Hosting.Abstractions": "2.2.0",
           "Microsoft.Extensions.DependencyInjection": "3.1.6",
           "Microsoft.Extensions.Logging": "3.1.6",
-          "Serilog": "2.9.0",
+          "Serilog": "3.1.1",
           "Serilog.Extensions.Logging": "3.0.1"
         },
         "runtime": {
@@ -1513,7 +1513,7 @@
       "Serilog.Extensions.Logging/3.0.1": {
         "dependencies": {
           "Microsoft.Extensions.Logging": "3.1.6",
-          "Serilog": "2.9.0"
+          "Serilog": "3.1.1"
         },
         "runtime": {
           "lib/netstandard2.0/Serilog.Extensions.Logging.dll": {
@@ -1526,7 +1526,7 @@
         "dependencies": {
           "Microsoft.Extensions.DependencyModel": "2.1.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "3.1.1",
-          "Serilog": "2.9.0"
+          "Serilog": "3.1.1"
         },
         "runtime": {
           "lib/netstandard2.0/Serilog.Settings.Configuration.dll": {
@@ -1535,21 +1535,21 @@
           }
         }
       },
-      "Serilog.Sinks.ApplicationInsights/3.1.0": {
+      "Serilog.Sinks.ApplicationInsights/4.0.0": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "2.12.0",
-          "Serilog": "2.9.0"
+          "Microsoft.ApplicationInsights": "2.20.0",
+          "Serilog": "3.1.1"
         },
         "runtime": {
           "lib/netstandard2.0/Serilog.Sinks.ApplicationInsights.dll": {
-            "assemblyVersion": "3.1.0.0",
-            "fileVersion": "3.1.0.0"
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
           }
         }
       },
       "Serilog.Sinks.Async/1.4.0": {
         "dependencies": {
-          "Serilog": "2.9.0"
+          "Serilog": "3.1.1"
         },
         "runtime": {
           "lib/netstandard2.0/Serilog.Sinks.Async.dll": {
@@ -1561,7 +1561,7 @@
       "Serilog.Sinks.AzureAnalytics/4.6.0": {
         "dependencies": {
           "Newtonsoft.Json": "11.0.2",
-          "Serilog": "2.9.0",
+          "Serilog": "3.1.1",
           "System.Net.Http": "4.3.4"
         },
         "runtime": {
@@ -1573,7 +1573,7 @@
       },
       "Serilog.Sinks.Console/3.1.1": {
         "dependencies": {
-          "Serilog": "2.9.0",
+          "Serilog": "3.1.1",
           "System.Console": "4.3.0",
           "System.Runtime.InteropServices": "4.3.0",
           "System.Runtime.InteropServices.RuntimeInformation": "4.3.0"
@@ -1587,7 +1587,7 @@
       },
       "Serilog.Sinks.File/4.0.0": {
         "dependencies": {
-          "Serilog": "2.9.0",
+          "Serilog": "3.1.1",
           "System.IO": "4.3.0",
           "System.IO.FileSystem": "4.3.0",
           "System.IO.FileSystem.Primitives": "4.3.0",
@@ -1725,7 +1725,7 @@
           "System.Collections.Concurrent": "4.3.0",
           "System.Data.Common": "4.3.0",
           "System.Diagnostics.Debug": "4.3.0",
-          "System.Diagnostics.DiagnosticSource": "4.7.0",
+          "System.Diagnostics.DiagnosticSource": "7.0.2",
           "System.Globalization": "4.3.0",
           "System.IO": "4.3.0",
           "System.IO.Pipes": "4.3.0",
@@ -1779,7 +1779,18 @@
           "System.Runtime": "4.3.1"
         }
       },
-      "System.Diagnostics.DiagnosticSource/4.7.0": {},
+      "System.Diagnostics.DiagnosticSource/7.0.2": {
+        "dependencies": {
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Diagnostics.DiagnosticSource.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.423.11508"
+          }
+        }
+      },
       "System.Diagnostics.EventLog/4.7.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "5.0.0",
@@ -2081,13 +2092,13 @@
           "System.Threading": "4.3.0"
         }
       },
-      "System.Memory/4.5.4": {},
+      "System.Memory/4.5.5": {},
       "System.Net.Http/4.3.4": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "5.0.0",
           "System.Collections": "4.3.0",
           "System.Diagnostics.Debug": "4.3.0",
-          "System.Diagnostics.DiagnosticSource": "4.7.0",
+          "System.Diagnostics.DiagnosticSource": "7.0.2",
           "System.Diagnostics.Tracing": "4.3.0",
           "System.Globalization": "4.3.0",
           "System.Globalization.Extensions": "4.3.0",
@@ -2363,7 +2374,14 @@
           }
         }
       },
-      "System.Runtime.CompilerServices.Unsafe/4.5.2": {},
+      "System.Runtime.CompilerServices.Unsafe/6.0.0": {
+        "runtime": {
+          "lib/netcoreapp3.1/System.Runtime.CompilerServices.Unsafe.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
       "System.Runtime.Extensions/4.3.1": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "5.0.0",
@@ -2639,7 +2657,7 @@
       "System.Text.Encoding.CodePages/4.5.1": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "5.0.0",
-          "System.Runtime.CompilerServices.Unsafe": "4.5.2"
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         }
       },
       "System.Text.Encoding.Extensions/4.3.0": {
@@ -2800,7 +2818,7 @@
           "RestSharp": "107.3.0",
           "Samurai.Integration.Domain": "1.0.0",
           "Samurai.Integration.EntityFramework": "1.0.0",
-          "Serilog": "2.9.0",
+          "Serilog": "3.1.1",
           "System.Runtime.Extensions": "4.3.1"
         },
         "runtime": {
@@ -2819,10 +2837,10 @@
           "Samurai.Integration.Domain": "1.0.0",
           "Samurai.Integration.Email": "1.0.0",
           "Samurai.Integration.EntityFramework": "1.0.0",
-          "Serilog": "2.9.0",
+          "Serilog": "3.1.1",
           "Serilog.AspNetCore": "2.1.1",
           "Serilog.Settings.Configuration": "3.1.0",
-          "Serilog.Sinks.ApplicationInsights": "3.1.0",
+          "Serilog.Sinks.ApplicationInsights": "4.0.0",
           "Serilog.Sinks.Async": "1.4.0",
           "Serilog.Sinks.AzureAnalytics": "4.6.0",
           "Serilog.Sinks.Console": "3.1.1",
@@ -2881,10 +2899,10 @@
           "Microsoft.Extensions.Logging.Console": "3.1.1",
           "Samurai.Integration.APIClient": "1.0.0",
           "Samurai.Integration.Application": "2.0.0-dev",
-          "Serilog": "2.9.0",
+          "Serilog": "3.1.1",
           "Serilog.Extensions.Logging": "3.0.1",
           "Serilog.Settings.Configuration": "3.1.0",
-          "Serilog.Sinks.ApplicationInsights": "3.1.0",
+          "Serilog.Sinks.ApplicationInsights": "4.0.0",
           "Serilog.Sinks.Async": "1.4.0",
           "Serilog.Sinks.Console": "3.1.1"
         },
@@ -2957,12 +2975,12 @@
       "path": "mailkit/3.2.0",
       "hashPath": "mailkit.3.2.0.nupkg.sha512"
     },
-    "Microsoft.ApplicationInsights/2.12.0": {
+    "Microsoft.ApplicationInsights/2.20.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-4vZcVaxywAzfLm5mAc2/llaZQTzbCqu9KirxxI/t49AkZH5Qxf7JxuAMUuv2/6JEdOOkGDzpvdrrIlf6LkFGcg==",
-      "path": "microsoft.applicationinsights/2.12.0",
-      "hashPath": "microsoft.applicationinsights.2.12.0.nupkg.sha512"
+      "sha512": "sha512-mb+EC5j06Msn5HhKrhrsMAst6JxvYUnphQMGY2cixCabgGAO3q79Y8o/p1Zce1Azgd1IVkRKAMzAV4vDCbXOqA==",
+      "path": "microsoft.applicationinsights/2.20.0",
+      "hashPath": "microsoft.applicationinsights.2.20.0.nupkg.sha512"
     },
     "Microsoft.ApplicationInsights.AspNetCore/2.8.0": {
       "type": "package",
@@ -3783,12 +3801,12 @@
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
     },
-    "Serilog/2.9.0": {
+    "Serilog/3.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-QzcrD33A3+CsVvwi1I5CSei67ikQnkGrw7SscgL+vZTghaC2aNYg8fiUcedXHzKJFNjgje9rBjzwYGQTKEaXaA==",
-      "path": "serilog/2.9.0",
-      "hashPath": "serilog.2.9.0.nupkg.sha512"
+      "sha512": "sha512-P6G4/4Kt9bT635bhuwdXlJ2SCqqn2nhh4gqFqQueCOr9bK/e7W9ll/IoX1Ter948cV2Z/5+5v8pAfJYUISY03A==",
+      "path": "serilog/3.1.1",
+      "hashPath": "serilog.3.1.1.nupkg.sha512"
     },
     "Serilog.AspNetCore/2.1.1": {
       "type": "package",
@@ -3811,12 +3829,12 @@
       "path": "serilog.settings.configuration/3.1.0",
       "hashPath": "serilog.settings.configuration.3.1.0.nupkg.sha512"
     },
-    "Serilog.Sinks.ApplicationInsights/3.1.0": {
+    "Serilog.Sinks.ApplicationInsights/4.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Pq0gU1IU4NKxsGKbIzQHgeSXUSn+QaUitgzCecZ+zbJ3Q4ZUqJovSV2FwMe4fBBefIjc5gG5AMRgUUYKK+c+qQ==",
-      "path": "serilog.sinks.applicationinsights/3.1.0",
-      "hashPath": "serilog.sinks.applicationinsights.3.1.0.nupkg.sha512"
+      "sha512": "sha512-AlYq1JFqh+RFKwLKZ3X224Zbe1gnkMbqSELp2FApLN0iMyRPdwwxMJBCCrk49C8qOefBd4zN+J/1Tq3i75DunA==",
+      "path": "serilog.sinks.applicationinsights/4.0.0",
+      "hashPath": "serilog.sinks.applicationinsights.4.0.0.nupkg.sha512"
     },
     "Serilog.Sinks.Async/1.4.0": {
       "type": "package",
@@ -3958,12 +3976,12 @@
       "path": "system.diagnostics.debug/4.3.0",
       "hashPath": "system.diagnostics.debug.4.3.0.nupkg.sha512"
     },
-    "System.Diagnostics.DiagnosticSource/4.7.0": {
+    "System.Diagnostics.DiagnosticSource/7.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-oJjw3uFuVDJiJNbCD8HB4a2p3NYLdt1fiT5OGsPLw+WTOuG0KpP4OXelMmmVKpClueMsit6xOlzy4wNKQFiBLg==",
-      "path": "system.diagnostics.diagnosticsource/4.7.0",
-      "hashPath": "system.diagnostics.diagnosticsource.4.7.0.nupkg.sha512"
+      "sha512": "sha512-hYr3I9N9811e0Bjf2WNwAGGyTuAFbbTgX1RPLt/3Wbm68x3IGcX5Cl75CMmgT6WlNwLQ2tCCWfqYPpypjaf2xA==",
+      "path": "system.diagnostics.diagnosticsource/7.0.2",
+      "hashPath": "system.diagnostics.diagnosticsource.7.0.2.nupkg.sha512"
     },
     "System.Diagnostics.EventLog/4.7.0": {
       "type": "package",
@@ -4119,12 +4137,12 @@
       "path": "system.linq.expressions/4.3.0",
       "hashPath": "system.linq.expressions.4.3.0.nupkg.sha512"
     },
-    "System.Memory/4.5.4": {
+    "System.Memory/4.5.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw==",
-      "path": "system.memory/4.5.4",
-      "hashPath": "system.memory.4.5.4.nupkg.sha512"
+      "sha512": "sha512-XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw==",
+      "path": "system.memory/4.5.5",
+      "hashPath": "system.memory.4.5.5.nupkg.sha512"
     },
     "System.Net.Http/4.3.4": {
       "type": "package",
@@ -4273,12 +4291,12 @@
       "path": "system.runtime.caching/4.5.0",
       "hashPath": "system.runtime.caching.4.5.0.nupkg.sha512"
     },
-    "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+    "System.Runtime.CompilerServices.Unsafe/6.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wprSFgext8cwqymChhrBLu62LMg/1u92bU+VOwyfBimSPVFXtsNqEWC92Pf9ofzJFlk4IHmJA75EDJn1b2goAQ==",
-      "path": "system.runtime.compilerservices.unsafe/4.5.2",
-      "hashPath": "system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512"
+      "sha512": "sha512-/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
+      "path": "system.runtime.compilerservices.unsafe/6.0.0",
+      "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
     },
     "System.Runtime.Extensions/4.3.1": {
       "type": "package",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mqwONUxxxlU1lsQ/jCT/kUjRuPcQ6bADa6yxSNQuziQjKNSSUptTt48oyhOZDqHvutLaPcPFDYbtpVkRH6r7tg==",
+  "dgSpecHash": "ybhUnaI5k8PFghcpRUsdaWxaINENpBLbPKYskwZU6YlHdlKJqBUyyIpVGRVU0ndpnFrnGRCAssk9STgwzGkjDA==",
   "success": true,
   "projectFilePath": "C:\\dev\\NewIntegration\\Samurai.Integration.BlingWebJob\\Samurai.Integration.BlingWebJob.csproj",
   "expectedPackageFiles": [
@@ -220,11 +220,7 @@
     "C:\\Users\\flavi\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\flavi\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\flavi\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\windowsazure.storage\\9.3.1\\windowsazure.storage.9.3.1.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.31\\microsoft.netcore.app.host.win-x64.3.1.31.nupkg.sha512"
+    "C:\\Users\\flavi\\.nuget\\packages\\windowsazure.storage\\9.3.1\\windowsazure.storage.9.3.1.nupkg.sha512"
   ],
   "logs": []
 }

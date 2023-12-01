@@ -24,3 +24,16 @@ C:\SI\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity
 C:\SI\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\obj\Production\netcoreapp3.1\Samurai.Integration.Identity.csproj.CopyComplete
 C:\SI\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\obj\Production\netcoreapp3.1\Samurai.Integration.Identity.dll
 C:\SI\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Identity\obj\Production\netcoreapp3.1\Samurai.Integration.Identity.pdb
+C:\dev\NewIntegration\Samurai.Integration.Identity\bin\Production\netcoreapp3.1\Samurai.Integration.Identity.deps.json
+C:\dev\NewIntegration\Samurai.Integration.Identity\bin\Production\netcoreapp3.1\Samurai.Integration.Identity.dll
+C:\dev\NewIntegration\Samurai.Integration.Identity\bin\Production\netcoreapp3.1\Samurai.Integration.Identity.pdb
+C:\dev\NewIntegration\Samurai.Integration.Identity\bin\Production\netcoreapp3.1\Samurai.Integration.Domain.dll
+C:\dev\NewIntegration\Samurai.Integration.Identity\bin\Production\netcoreapp3.1\Samurai.Integration.Domain.pdb
+C:\dev\NewIntegration\Samurai.Integration.Identity\obj\Production\netcoreapp3.1\Samurai.Integration.Identity.csproj.AssemblyReference.cache
+C:\dev\NewIntegration\Samurai.Integration.Identity\obj\Production\netcoreapp3.1\Samurai.Integration.Identity.GeneratedMSBuildEditorConfig.editorconfig
+C:\dev\NewIntegration\Samurai.Integration.Identity\obj\Production\netcoreapp3.1\Samurai.Integration.Identity.AssemblyInfoInputs.cache
+C:\dev\NewIntegration\Samurai.Integration.Identity\obj\Production\netcoreapp3.1\Samurai.Integration.Identity.AssemblyInfo.cs
+C:\dev\NewIntegration\Samurai.Integration.Identity\obj\Production\netcoreapp3.1\Samurai.Integration.Identity.csproj.CoreCompileInputs.cache
+C:\dev\NewIntegration\Samurai.Integration.Identity\obj\Production\netcoreapp3.1\Samurai.Integration.Identity.csproj.CopyComplete
+C:\dev\NewIntegration\Samurai.Integration.Identity\obj\Production\netcoreapp3.1\Samurai.Integration.Identity.dll
+C:\dev\NewIntegration\Samurai.Integration.Identity\obj\Production\netcoreapp3.1\Samurai.Integration.Identity.pdb

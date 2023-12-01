@@ -175,7 +175,7 @@ namespace Samurai.Integration.WebApi.Controllers
 
 
 
-#warning TODO: Verificar fluxo de autorização no app de integração com a Marcela
+
         [HttpPut("{id}")]
         [AllowAnonymous]
         public async Task<IActionResult> Put(long id, [FromBody] TenantViewModel tenant)

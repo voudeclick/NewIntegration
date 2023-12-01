@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gVKkOW4oy5rCUGHkxKexchr6Je5KfojQmOjC8denWDCyt+86AS2G4S/QYycubMmTXXLc9x2WEwXdtePU5ooa9Q==",
+  "dgSpecHash": "LYpfALAjgR3OMtx9nYmkJfU38dPr3bTIyzAfkDZVe3l41Tm69MCm0rZHt1V3yMeD8ZN8ZUTI4DxAC50oyL8jOQ==",
   "success": true,
   "projectFilePath": "C:\\dev\\NewIntegration\\Samurai.Integration.Identity\\Samurai.Integration.Identity.csproj",
   "expectedPackageFiles": [
@@ -171,10 +171,7 @@
     "C:\\Users\\flavi\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\flavi\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\flavi\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512"
+    "C:\\Users\\flavi\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

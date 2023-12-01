@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "k5UthlkzdD4tNI7PROYuwo69Y09kk7VsaHccxCraFAGF6KrXYCuDMBycJZJNkQA6bnjtti9TeFH74gjg/Q4Dbg==",
+  "dgSpecHash": "CjETJxtFi2UPFwYSVfDSSOAnvQvxfT9Gu3xbDC0Ds2tjgBkTqSsAx6yNfeuJAEesauOEV3CuZpyy1GEo1K7Lbg==",
   "success": true,
   "projectFilePath": "C:\\dev\\NewIntegration\\Samurai.Integration.EntityFramework\\Samurai.Integration.EntityFramework.csproj",
   "expectedPackageFiles": [
@@ -171,10 +171,7 @@
     "C:\\Users\\flavi\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\flavi\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\flavi\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\windowsazure.storage\\9.3.1\\windowsazure.storage.9.3.1.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512"
+    "C:\\Users\\flavi\\.nuget\\packages\\windowsazure.storage\\9.3.1\\windowsazure.storage.9.3.1.nupkg.sha512"
   ],
   "logs": [
     {

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "aH9sonIX3J+nHyYPPhos53t+xbqV3sJoNgEruZ7+BzY805n7bljVXDEmpbZp8r5+KTJQ9awJ0z4YHRtGfU44kg==",
+  "dgSpecHash": "dHsN+I/c7AgcRhuA5A+9m3HnESvU1fb3SB7IKIC44Sx+t+kp+5yYlQiBZFU9cRNEBVmwPdiFelWzerCqI/U5jg==",
   "success": true,
   "projectFilePath": "C:\\dev\\NewIntegration\\Samurai.Integration.Domain.Tests\\Samurai.Integration.Domain.Tests.csproj",
   "expectedPackageFiles": [
@@ -185,10 +185,7 @@
     "C:\\Users\\flavi\\.nuget\\packages\\xunit.core\\2.4.1\\xunit.core.2.4.1.nupkg.sha512",
     "C:\\Users\\flavi\\.nuget\\packages\\xunit.extensibility.core\\2.4.1\\xunit.extensibility.core.2.4.1.nupkg.sha512",
     "C:\\Users\\flavi\\.nuget\\packages\\xunit.extensibility.execution\\2.4.1\\xunit.extensibility.execution.2.4.1.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\xunit.runner.visualstudio\\2.4.3\\xunit.runner.visualstudio.2.4.3.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\flavi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512"
+    "C:\\Users\\flavi\\.nuget\\packages\\xunit.runner.visualstudio\\2.4.3\\xunit.runner.visualstudio.2.4.3.nupkg.sha512"
   ],
   "logs": [
     {

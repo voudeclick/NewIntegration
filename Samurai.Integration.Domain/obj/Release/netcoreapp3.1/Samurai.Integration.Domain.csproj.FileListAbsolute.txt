@@ -18,3 +18,13 @@ C:\SI\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Domain\o
 C:\SI\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Domain\obj\Release\netcoreapp3.1\Samurai.Integration.Domain.csproj.CoreCompileInputs.cache
 C:\SI\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Domain\obj\Release\netcoreapp3.1\Samurai.Integration.Domain.dll
 C:\SI\lucassamurai-samurai.integration-e27d64729d29\Samurai.Integration.Domain\obj\Release\netcoreapp3.1\Samurai.Integration.Domain.pdb
+C:\dev\NewIntegration\Samurai.Integration.Domain\bin\Release\netcoreapp3.1\Samurai.Integration.Domain.deps.json
+C:\dev\NewIntegration\Samurai.Integration.Domain\bin\Release\netcoreapp3.1\Samurai.Integration.Domain.dll
+C:\dev\NewIntegration\Samurai.Integration.Domain\bin\Release\netcoreapp3.1\Samurai.Integration.Domain.pdb
+C:\dev\NewIntegration\Samurai.Integration.Domain\obj\Release\netcoreapp3.1\Samurai.Integration.Domain.csproj.AssemblyReference.cache
+C:\dev\NewIntegration\Samurai.Integration.Domain\obj\Release\netcoreapp3.1\Samurai.Integration.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\dev\NewIntegration\Samurai.Integration.Domain\obj\Release\netcoreapp3.1\Samurai.Integration.Domain.AssemblyInfoInputs.cache
+C:\dev\NewIntegration\Samurai.Integration.Domain\obj\Release\netcoreapp3.1\Samurai.Integration.Domain.AssemblyInfo.cs
+C:\dev\NewIntegration\Samurai.Integration.Domain\obj\Release\netcoreapp3.1\Samurai.Integration.Domain.csproj.CoreCompileInputs.cache
+C:\dev\NewIntegration\Samurai.Integration.Domain\obj\Release\netcoreapp3.1\Samurai.Integration.Domain.dll
+C:\dev\NewIntegration\Samurai.Integration.Domain\obj\Release\netcoreapp3.1\Samurai.Integration.Domain.pdb

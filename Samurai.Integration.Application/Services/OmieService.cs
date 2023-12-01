@@ -1,5 +1,7 @@
 ﻿using Akka.Actor;
 using Akka.Event;
+using Castle.Core.Internal;
+using Microsoft.Azure.Amqp.Framing;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -722,6 +724,7 @@ namespace Samurai.Integration.Application.Services
             }
             catch (Exception ex)
             {
+                _logger.Warning("error on update order: {0} | ex: {1}", message.ExternalID, ex.ToString());
                 process.Exception = ex.Message;
                 _omieOrderIntegrationRepository.Save(process);
                 throw;
@@ -741,6 +744,8 @@ namespace Samurai.Integration.Application.Services
             var freteMapping = omieData.FreteMapping.Where(m => string.Equals(m.ShopifyCarrierTitle, message.CarrierName, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
 
             var meioPagamento = string.Empty;
+
+            
             if (message.PaymentData.PaymentType.ToUpper().Equals("BOLETO") || message.PaymentData.PaymentType.ToLower().Equals("boleto"))
                 meioPagamento = "15"; //Boleto Bancário
             if (message.PaymentData.PaymentType.ToUpper().Equals("CREDITO") || message.PaymentData.PaymentType.ToLower().Equals("cartão"))
