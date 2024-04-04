@@ -1,2 +1,2 @@
-# Samurai.Integration
+# VDC.Integration
 

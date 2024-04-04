@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\Samurai.Integration.Front.props" />
-</Project>

@@ -1,1 +1,0 @@
-dotnet Samurai.Integration.ShopifyWebJob.dll %*

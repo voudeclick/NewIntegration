@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Configurations>Debug;Release;Production</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Akka" Version="1.5.14" />
+    <PackageReference Include="ByteSize" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Azure.ServiceBus" Version="5.2.0" />
+  </ItemGroup>
+
+  </Project>

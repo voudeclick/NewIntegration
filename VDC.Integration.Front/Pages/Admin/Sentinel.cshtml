@@ -1,0 +1,48 @@
+﻿@page
+@model VDC.Integration.Front.Pages.Admin.SentinelModel
+@{
+    ViewData["Title"] = "Sentinel";
+}
+
+<div class="titlePage"><div id="sentinelIcon"></div><h1>@ViewData["Title"]</h1></div>
+
+
+<div id="orientation-buttons" class="orientation-buttons-center">
+    <button id="btn-queue" class="btn-center btn-efeito" onclick="queues()">Filas</button>
+    <button id="btn-customer" class="btn-center btn-efeito" onclick="customer()">Lojas</button>
+</div>
+
+
+<div id="queues" hidden>
+    <small class="form-text text-muted" id="info">Filas com quantidade de msg maior que 500 e dead-letter maior que 100</small>
+    <br />
+    <div class="accordionLoad" id="accordionLoad">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="accordion" id="accordion"></div>
+</div>
+
+<div id="stores" hidden>
+    <small class="form-text text-muted" id="info">Lojas com pedidos não integrados nas ultimas 24h</small>
+    <br />
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" style="width:50px">#</th>
+                <th scope="col" style="width:500px">Loja</th>
+                <th scope="col" style="width:500px">Pedidos não integrados</th>
+            </tr>
+        </thead>
+        <tbody id="storeTbody"> </tbody>
+    </table>
+</div>
+
+
+@section Scripts {
+<script src="~/js/SentinelController.js" asp-append-version="true"></script>
+}

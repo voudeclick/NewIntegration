@@ -1,0 +1,18 @@
+﻿@page
+@model VDC.Integration.Front.Pages.Admin.UsersModel
+@{
+    ViewData["Title"] = "Usuários";    
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div ng-controller="usersController" class="ng-cloak">
+    <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="row-border hover">
+    </table>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.all.min.js"></script>    
+    <script src="~/js/usersController.js" asp-append-version="true"></script>
+    
+}
