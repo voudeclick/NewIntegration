@@ -104,7 +104,7 @@ namespace VDC.Integration.Application.Services
                         do
                         {
                             page++;
-                            await Task.Delay(1000);
+                            await Task.Delay(20000);
                             result = await _apiActorGroup.Ask<ReturnMessage<ListarProdutosOmieRequestOutput>>(
                                 new ListarProdutosOmieRequest(
                                     new ListarProdutosOmieRequestInput
@@ -147,7 +147,7 @@ namespace VDC.Integration.Application.Services
                     {
                         if (sku.inativo != "S")
                         {
-                            await Task.Delay(1000);
+                            await Task.Delay(20000);
                             var result = await _apiActorGroup.Ask<ReturnMessage<PosicaoEstoqueOmieRequestOutput>>(
                                     new PosicaoEstoqueOmieRequest(
                                         new PosicaoEstoqueOmieRequestInput
