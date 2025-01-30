@@ -3,7 +3,7 @@
     public class InventoryLevelResult
     {
         public string id { get; set; }
-        public int available { get; set; }
+        public QuantitiesResult quantities { get; set; }
         public LocationResult location { get; set; }
     }
 }

@@ -347,7 +347,7 @@ namespace VDC.Integration.Application.Services
 
                             inventoryItemAdjustments.Add(new InventoryAdjustment
                             {
-                                availableDelta = sku.Stock.Quantity - inventoryItem.available,
+                                availableDelta = sku.Stock.Quantity - inventoryItem.quantities.quantity,
                                 inventoryItemId = shopifyVariant.inventoryItem.id
                             });
                         }
@@ -1083,7 +1083,7 @@ namespace VDC.Integration.Application.Services
                 if (inventoryItem == null)
                     throw new Exception($"TenantId: {shopifyData.Id} - No inventory item in variant {currentData.legacyResourceId} sku:{message.Value.Sku}");
 
-                if (message.Value.Quantity != inventoryItem.available)
+                if (message.Value.Quantity != inventoryItem.quantities.quantity)
                 {
                     var createResult = await _apiActorGroup.Ask<ReturnMessage<InventoryUpdateMutationOutput>>(
                            new InventoryUpdateMutation(new InventoryUpdateMutationInput
@@ -1093,7 +1093,7 @@ namespace VDC.Integration.Application.Services
                                    inventoryLevelId = inventoryItem.id,
                                    availableDelta = message.Value.DecreaseStock
                                     ? -message.Value.Quantity
-                                    : message.Value.Quantity - inventoryItem.available
+                                    : message.Value.Quantity - inventoryItem.quantities.quantity
                                }
                            }), cancellationToken);
 
@@ -1166,7 +1166,7 @@ namespace VDC.Integration.Application.Services
                         },
                         inventoryItemAdjustments = new List<InventoryAdjustment> {
                             new InventoryAdjustment {
-                                availableDelta = -inventoryItem.available,
+                                availableDelta = -inventoryItem.quantities.quantity,
                                 inventoryItemId = currentData.variants.edges.FirstOrDefault()?.node?.inventoryItem?.id
                             },
                             new InventoryAdjustment {
@@ -1189,7 +1189,7 @@ namespace VDC.Integration.Application.Services
                     },
                     inventoryItemAdjustments = new List<InventoryAdjustment> {
                             new InventoryAdjustment {
-                                availableDelta = -inventoryItem.available,
+                                availableDelta = -inventoryItem.quantities.quantity,
                                 inventoryItemId = currentData.variants.edges.FirstOrDefault()?.node?.inventoryItem?.id
                             },
                             new InventoryAdjustment {

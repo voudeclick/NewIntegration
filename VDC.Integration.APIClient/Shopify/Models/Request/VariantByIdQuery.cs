@@ -38,7 +38,10 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
                                 edges {{
                                     node {{
                                         id,
-                                        available,
+                                        quantities {{
+                                            names: [""available""],
+                                            quantity
+                                        }},
                                         location {{
                                             id,
                                             legacyResourceId
