@@ -113,6 +113,7 @@ namespace VDC.Integration.Application.Services
 
                 if (queryByIdResult.Data.product != null)
                     currentData = queryByIdResult.Data.product;
+
             }
 
             if (currentData == null && !string.IsNullOrWhiteSpace(message.ProductInfo.ExternalId))
@@ -347,7 +348,7 @@ namespace VDC.Integration.Application.Services
 
                             inventoryItemAdjustments.Add(new InventoryAdjustment
                             {
-                                availableDelta = sku.Stock.Quantity - inventoryItem.quantities.quantity,
+                                availableDelta = sku.Stock.Quantity - inventoryItem.quantities[0].quantity,
                                 inventoryItemId = shopifyVariant.inventoryItem.id
                             });
                         }
@@ -535,6 +536,7 @@ namespace VDC.Integration.Application.Services
 
                 if (queryByIdResult.Data.product != null)
                     currentData = queryByIdResult.Data.product;
+
             }
 
             if (currentData == null && !string.IsNullOrWhiteSpace(message.ProductInfo.ExternalId))
@@ -1083,7 +1085,7 @@ namespace VDC.Integration.Application.Services
                 if (inventoryItem == null)
                     throw new Exception($"TenantId: {shopifyData.Id} - No inventory item in variant {currentData.legacyResourceId} sku:{message.Value.Sku}");
 
-                if (message.Value.Quantity != inventoryItem.quantities.quantity)
+                if (message.Value.Quantity != inventoryItem.quantities[0].quantity)
                 {
                     var createResult = await _apiActorGroup.Ask<ReturnMessage<InventoryUpdateMutationOutput>>(
                            new InventoryUpdateMutation(new InventoryUpdateMutationInput
@@ -1093,7 +1095,7 @@ namespace VDC.Integration.Application.Services
                                    inventoryLevelId = inventoryItem.id,
                                    availableDelta = message.Value.DecreaseStock
                                     ? -message.Value.Quantity
-                                    : message.Value.Quantity - inventoryItem.quantities.quantity
+                                    : message.Value.Quantity - inventoryItem.quantities[0].quantity
                                }
                            }), cancellationToken);
 
@@ -1166,7 +1168,7 @@ namespace VDC.Integration.Application.Services
                         },
                         inventoryItemAdjustments = new List<InventoryAdjustment> {
                             new InventoryAdjustment {
-                                availableDelta = -inventoryItem.quantities.quantity,
+                                availableDelta = -inventoryItem.quantities[0].quantity,
                                 inventoryItemId = currentData.variants.edges.FirstOrDefault()?.node?.inventoryItem?.id
                             },
                             new InventoryAdjustment {
@@ -1189,7 +1191,7 @@ namespace VDC.Integration.Application.Services
                     },
                     inventoryItemAdjustments = new List<InventoryAdjustment> {
                             new InventoryAdjustment {
-                                availableDelta = -inventoryItem.quantities.quantity,
+                                availableDelta = -inventoryItem.quantities[0].quantity,
                                 inventoryItemId = currentData.variants.edges.FirstOrDefault()?.node?.inventoryItem?.id
                             },
                             new InventoryAdjustment {
