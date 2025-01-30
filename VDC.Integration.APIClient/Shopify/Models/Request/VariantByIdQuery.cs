@@ -38,7 +38,7 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
                                 edges {{
                                     node {{
                                         id,
-                                        quantities(names:[""available2""]) {{
+                                        quantities(names:[""available""]) {{
                                             quantity
                                         }},
                                         location {{
