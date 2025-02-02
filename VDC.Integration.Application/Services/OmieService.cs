@@ -474,6 +474,21 @@ namespace VDC.Integration.Application.Services
                 if (currentData.Data?.pedido_venda_produto == null)
                 {
                     if (string.IsNullOrWhiteSpace(message.Customer.Company))
+                    {
+                        var cpfCnpj = "";
+
+                        foreach (var noteAttribute in message.NoteAttributes)
+                        {
+                            if (noteAttribute.Name.Equals("company"))
+                            {
+                                cpfCnpj = noteAttribute.Value;
+                            }
+                        }
+
+                        message.Customer.Company = cpfCnpj;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(message.Customer.Company))
                         throw new Exception($"cpf/cnpj obrigatório");
 
                     var items = new List<IncluirPedidoOmieRequestInput.Item>();

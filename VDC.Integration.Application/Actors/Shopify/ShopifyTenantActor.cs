@@ -694,9 +694,11 @@ namespace VDC.Integration.Application.Actors.Shopify
                 Metafield productGroupingMetafield = null;
                 var currentGroupingMetafield = currentData?.metafields.edges.Select(x => x.node).FirstOrDefault(x => x.key == "ProductGroupingHandles");
                 if (currentGroupingMetafield == null)
-                    productGroupingMetafield = new Metafield { key = "ProductGroupingHandles", valueType = "STRING" };
+                    //productGroupingMetafield = new Metafield { key = "ProductGroupingHandles", valueType = "STRING" };
+                    productGroupingMetafield = new Metafield { key = "ProductGroupingHandles" };
                 else
-                    productGroupingMetafield = new Metafield { id = currentGroupingMetafield.id, key = "ProductGroupingHandles", value = currentGroupingMetafield.value, valueType = "STRING" };
+                    //productGroupingMetafield = new Metafield { id = currentGroupingMetafield.id, key = "ProductGroupingHandles", value = currentGroupingMetafield.value, valueType = "STRING" };
+                    productGroupingMetafield = new Metafield { id = currentGroupingMetafield.id, key = "ProductGroupingHandles", value = currentGroupingMetafield.value };
 
                 var handles = string.Join("|", productGrouping.Where(x => currentData == null || x.id != currentData.id).Select(x => x.handle).OrderBy(x => x));
                 if (string.IsNullOrWhiteSpace(handles))

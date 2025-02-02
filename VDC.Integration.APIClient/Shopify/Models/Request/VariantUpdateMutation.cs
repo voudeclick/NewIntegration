@@ -14,22 +14,28 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
         public override string GetQuery()
         {
             return $@"
-                mutation productVariantUpdate($input: ProductVariantInput!) {{
-                  productVariantUpdate(input: $input) {{
-                    product {{
-                        id,
-                        legacyResourceId
-                    }},
-                    productVariant {{
-                        id,
-                        legacyResourceId,
-                        sku
-                    }},
-                    userErrors {{
-                        field,
-                        message
+                mutation productVariantsBulkUpdate($productId: ID!, $variants: [ProductVariantsBulkInput!]!) {{
+                    productVariantsBulkUpdate(productId: $productId, variants: $variants) {{
+                        product {{
+                            id
+                        }}
+                        productVariants {{
+                            id
+                            metafields(first: 2) {{
+                                edges {{
+                                    node {{
+                                        namespace
+                                        key
+                                        value
+                                    }}
+                                }}
+                            }}
+                        }}
+                        userErrors {{
+                            field
+                            message
+                        }}
                     }}
-                  }}
                 }}
             ";
         }
@@ -37,17 +43,17 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
 
     public class VariantUpdateMutationInput : BaseMutationInput
     {
-        public Variant input { get; set; }
+        public string productId { get; set; }
+        public List<VariantUpdateVariantsInput> variants { get; set; }
     }
 
     public class VariantUpdateMutationOutput : BaseMutationOutput
     {
-        public VariantResult productVariantUpdate { get; set; }
+        public VariantItemResult productVariantsBulkUpdate { get; set; }
 
-        public class VariantResult
+        public class VariantItemResult
         {
             public ProductResult product { get; set; }
-            public VariantResult productVariant { get; set; }
             public List<UserError> userErrors { get; set; }
         }
     }

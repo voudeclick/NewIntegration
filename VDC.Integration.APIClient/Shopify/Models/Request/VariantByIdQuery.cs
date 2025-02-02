@@ -14,15 +14,38 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
         public override string GetQuery()
         {
             return $@"
-                query variantById {{
+                query ProductVariantMetafield {{
                     productVariant(id: ""gid://shopify/ProductVariant/{_id}"") {{
                         id,
                         legacyResourceId,
                         sku,
-                        selectedOptions{{
+                        price,
+                        compareAtPrice,
+                        product {{
+                            id,
+                            legacyResourceId,
+                            handle,
+                            title,
+                            onlineStoreUrl,
+                            tags,
+                            options {{
+                                name,
+                                values
+                            }},
+                            metafields(first: 10) {{
+                                edges {{
+                                    node {{
+                                        id,
+                                        key,
+                                        value
+                                    }}
+                                }}
+                            }}
+                        }},
+                        selectedOptions {{
                             name,
                             value
-                        }}
+                        }},
                         metafields(namespace: ""VDC.Integration"", first: 10) {{
                           edges {{
                             node {{

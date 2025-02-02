@@ -4,9 +4,9 @@ using VDC.Integration.Domain.Shopify.Models.Results;
 
 namespace VDC.Integration.APIClient.Shopify.Models.Request
 {
-    public class InventoryUpdateMutation : BaseMutation<InventoryUpdateMutationInput, InventoryUpdateMutationOutput>
+    public class InventorySetQuantitiesMutation : BaseMutation<InventorySetQuantitiesInput, InventoryUpdateMutationOutput>
     {
-        public InventoryUpdateMutation(InventoryUpdateMutationInput variables)
+        public InventorySetQuantitiesMutation(InventorySetQuantitiesInput variables)
             : base(variables)
         {
         }
@@ -14,11 +14,8 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
         public override string GetQuery()
         {
             return $@"
-                mutation inventoryUpdate($input: InventoryAdjustQuantityInput!) {{
-                    inventoryAdjustQuantity(input: $input) {{
-                        inventoryLevel {{
-                            id
-                        }},
+                mutation InventorySet($input: InventorySetQuantitiesInput!) {{
+                    inventorySetQuantities(input: $input) {{
                         userErrors {{
                             field,
                             message
@@ -29,7 +26,7 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
         }
     }
 
-    public class InventoryUpdateMutationInput : BaseMutationInput
+    public class InventorySetQuantitiesInput : BaseMutationInput
     {
         public InventoryLevel input { get; set; }
     }
@@ -40,7 +37,6 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
 
         public class InventoryUpdateResult
         {
-            public InventoryLevelResult inventoryLevel { get; set; }
             public List<UserError> userErrors { get; set; }
         }
     }
