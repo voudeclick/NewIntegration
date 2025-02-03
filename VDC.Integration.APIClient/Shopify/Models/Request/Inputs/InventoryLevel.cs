@@ -2,7 +2,8 @@
 {
     public class InventoryLevel
     {
-        public string inventoryLevelId { get; set; }
-        public int availableDelta { get; set; }
+        public string inventoryItemId { get; set; }
+        public string locationId { get; set; }
+        public int quantity { get; set; }
     }
 }

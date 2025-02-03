@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VDC.Integration.APIClient.Shopify.Models.Request.Inputs;
 using VDC.Integration.Domain.Shopify.Models.Results;
 
 namespace VDC.Integration.APIClient.Shopify.Models.Request
 {
-    public class InventorySetQuantitiesMutation : BaseMutation<InventorySetQuantitiesInput, InventoryUpdateMutationOutput>
+    public class InventorySetQuantitiesMutation : BaseMutation<InventorySetQuantitiesInput, InventorySetMutationOutput>
     {
         public InventorySetQuantitiesMutation(InventorySetQuantitiesInput variables)
             : base(variables)
@@ -28,12 +29,27 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
 
     public class InventorySetQuantitiesInput : BaseMutationInput
     {
-        public InventoryLevel input { get; set; }
+        public InventorySetQuantitiesInputInput input { get; set; }
+
+        public class InventorySetQuantitiesInputInput
+        {
+            public bool ignoreCompareQuantity { get; set; }
+            public string reason { get; set; }
+            public string name { get; set; }
+            public List<InventorySetQuantitiesInputInputQuantities> quantities { get; set; }
+        }
+
+        public class InventorySetQuantitiesInputInputQuantities
+        {
+            public string inventoryItemId { get; set; }
+            public string locationId { get; set; }
+            public decimal? quantity { get; set; }
+        }
     }
 
-    public class InventoryUpdateMutationOutput : BaseMutationOutput
+    public class InventorySetMutationOutput : BaseMutationOutput
     {
-        public InventoryUpdateResult inventoryAdjustQuantity { get; set; }
+        public InventoryUpdateResult inventorySetQuantities { get; set; }
 
         public class InventoryUpdateResult
         {

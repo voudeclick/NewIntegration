@@ -42,6 +42,7 @@ using VDC.Integration.Domain.Models.GatewayNoteAttributes;
 using VDC.Integration.Domain.Shopify.Models.Request;
 using VDC.Integration.Domain.Shopify.Models.Results;
 using VDC.Integration.EntityFramework.Repositories;
+using static VDC.Integration.APIClient.Shopify.Models.Request.InventorySetQuantitiesInput;
 using static VDC.Integration.APIClient.Shopify.Models.Request.ProductVariantsBulkInput;
 using static VDC.Integration.Domain.Shopify.Models.Results.REST.OrderResult;
 using Order = VDC.Integration.APIClient.Shopify.Models.Request.Inputs.Order;
@@ -1121,29 +1122,37 @@ namespace VDC.Integration.Application.Services
 
                 if (message.Value.Quantity != inventoryItem.quantities[0].quantity)
                 {
-                    var createResult = await _apiActorGroup.Ask<ReturnMessage<InventoryUpdateMutationOutput>>(
-                           new InventoryUpdateMutation(new InventoryUpdateMutationInput
+                    ReturnMessage<InventorySetMutationOutput> createResultInventorySet = await _apiActorGroup.Ask<ReturnMessage<InventorySetMutationOutput>>(
+                           new InventorySetQuantitiesMutation(new InventorySetQuantitiesInput
                            {
-                               input = new InventoryLevel
+                               input = new InventorySetQuantitiesInputInput
                                {
-                                   inventoryLevelId = inventoryItem.id,
-                                   availableDelta = message.Value.DecreaseStock
-                                    ? -message.Value.Quantity
-                                    : message.Value.Quantity - inventoryItem.quantities[0].quantity
+                                   ignoreCompareQuantity = true,
+                                   reason = "correction",
+                                   name = "available",
+                                   quantities = new List<InventorySetQuantitiesInputInputQuantities>
+                                    {
+                                        new InventorySetQuantitiesInputInputQuantities
+                                        {
+                                            inventoryItemId = currentData.inventoryItem?.id,
+                                            locationId = inventoryItem.location?.id,
+                                            quantity = message.Value.Quantity
+                                        }
+                                    }
                                }
                            }), cancellationToken);
 
-                    if (createResult.Result == Result.Error)
+                    if (createResultInventorySet.Result == Result.Error)
                     {
-                        var errorMessage = new ReturnMessage { Result = Result.Error, Error = createResult.Error };
-                        _logger.Warning($"ShopifyService - Error in UpdateStock | {createResult.Error.Message}", Extensions.LoggingExtensions.FromService(Extensions.LoggingExtensions.GetCurrentMethod(), message, shopifyData,
+                        var errorMessage = new ReturnMessage { Result = Result.Error, Error = createResultInventorySet.Error };
+                        _logger.Warning($"ShopifyService - Error in UpdateStock | {createResultInventorySet.Error.Message}", Extensions.LoggingExtensions.FromService(Extensions.LoggingExtensions.GetCurrentMethod(), message, shopifyData,
                                     $"Error when updating inventory for sku - {message.Value.Sku}"));
                         return errorMessage;
                     }
 
-                    if (createResult.Data.inventoryAdjustQuantity.userErrors?.Any() == true)
+                    if (createResultInventorySet.Data.inventorySetQuantities.userErrors?.Any() == true)
                     {
-                        var errormessage = $"TenantId: {shopifyData.Id} - Error in update shopify stock: {JsonSerializer.Serialize(createResult.Data.inventoryAdjustQuantity.userErrors)}";
+                        var errormessage = $"TenantId: {shopifyData.Id} - Error in update shopify stock: {JsonSerializer.Serialize(createResultInventorySet.Data.inventorySetQuantities.userErrors)}";
                         _logger.Warning(errormessage);
                         throw new Exception(errormessage);
                     }
