@@ -4,9 +4,9 @@ using VDC.Integration.Domain.Shopify.Models.Results;
 
 namespace VDC.Integration.APIClient.Shopify.Models.Request
 {
-    public class VariantUpdateMutation : BaseMutation<VariantUpdateMutationInput, VariantUpdateMutationOutput>
+    public class VariantUpdateMutation : BaseMutation<ProductVariantsBulkInput, ProductVariantsBulkMutationOutput>
     {
-        public VariantUpdateMutation(VariantUpdateMutationInput variables)
+        public VariantUpdateMutation(ProductVariantsBulkInput variables)
             : base(variables)
         {
         }
@@ -15,46 +15,67 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
         {
             return $@"
                 mutation productVariantsBulkUpdate($productId: ID!, $variants: [ProductVariantsBulkInput!]!) {{
-                    productVariantsBulkUpdate(productId: $productId, variants: $variants) {{
-                        product {{
-                            id
-                        }}
-                        productVariants {{
-                            id
-                            metafields(first: 2) {{
-                                edges {{
-                                    node {{
-                                        namespace
-                                        key
-                                        value
-                                    }}
-                                }}
-                            }}
-                        }}
-                        userErrors {{
-                            field
-                            message
-                        }}
+                  productVariantsBulkUpdate(productId: $productId, variants: $variants) {{
+                    product {{
+                        id
+                    }},
+                    userErrors {{
+                        field,
+                        message
                     }}
+                  }}
                 }}
             ";
         }
     }
 
-    public class VariantUpdateMutationInput : BaseMutationInput
+    public class ProductVariantsBulkInput : BaseMutationInput
     {
         public string productId { get; set; }
-        public List<VariantUpdateVariantsInput> variants { get; set; }
+        public List<ProductVariantsBulkVariantMutationInput> variants { get; set; }
+
+        public class ProductVariantsBulkVariantMutationInput
+        {
+            public string id { get; set; }
+            public string barcode { get; set; }
+            public decimal? price { get; set; }
+            public ProductVariantsBulkVariantInventoryItemMutationInput inventoryItem { get; set; }
+            public List<ProductVariantsBulkVariantInventoryOptionValuesInput> optionValues { get; set; }
+        }
+
+        public class ProductVariantsBulkVariantInventoryItemMutationInput
+        {
+            public string sku { get; set; }
+            public ProductVariantsBulkVariantInventoryItemMeasurementMutationInput measurement { get; set; }
+        }
+
+        public class ProductVariantsBulkVariantInventoryItemMeasurementMutationInput
+        {
+            public ProductVariantsBulkVariantInventoryItemMeasurementWeightMutationInput weight { get; set; }
+        }
+
+        public class ProductVariantsBulkVariantInventoryItemMeasurementWeightMutationInput
+        {
+            public string unit { get; set; }
+            public decimal? value { get; set; }
+        }
+
+        public class ProductVariantsBulkVariantInventoryOptionValuesInput
+        {
+            public string optionName { get; set; }
+            public string name { get; set; }
+            public string linkedMetafieldValue { get; set; }
+        }
     }
 
-    public class VariantUpdateMutationOutput : BaseMutationOutput
+    public class ProductVariantsBulkMutationOutput : BaseMutationOutput
     {
-        public VariantItemResult productVariantsBulkUpdate { get; set; }
+        public ProductVariantsBulkProductMutationOutput product { get; set; }
+        public List<UserError> userErrors { get; set; }
 
-        public class VariantItemResult
+        public class ProductVariantsBulkProductMutationOutput
         {
-            public ProductResult product { get; set; }
-            public List<UserError> userErrors { get; set; }
+            public string id { get; set; }
         }
     }
 }

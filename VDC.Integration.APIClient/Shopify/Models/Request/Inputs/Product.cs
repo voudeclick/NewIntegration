@@ -12,7 +12,7 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request.Inputs
         public List<string> options { get; set; }
         public List<string> tags { get; set; }
         public List<Metafield> metafields { get; set; }
-        //public List<Variant> variants { get; set; }
-        //public List<Image> images { get; set; }
+        public List<Variant> variants { get; set; }
+        public List<Image> images { get; set; }
     }
 }

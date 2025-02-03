@@ -64,7 +64,7 @@ namespace VDC.Integration.Application.Actors.Shopify
             ReceiveAsync<ProductAppendImagesMutation>(Receive);
             ReceiveAsync<VariantUpdateMutation>(Receive);
             ReceiveAsync<InventoryActivateMutation>(Receive);
-            ReceiveAsync<InventorySetQuantitiesMutation>(Receive);
+            ReceiveAsync<InventoryUpdateMutation>(Receive);
             ReceiveAsync<CollectionCreateMutation>(Receive);
             ReceiveAsync<OrderByIdQuery>(Receive);
             ReceiveAsync<OrderByTagQuery>(Receive);

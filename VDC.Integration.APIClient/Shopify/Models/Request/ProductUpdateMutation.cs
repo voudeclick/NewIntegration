@@ -19,7 +19,16 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
                     product {{
                         id,
                         legacyResourceId,
-                        handle
+                        handle,
+                        variants(first: {Variables.input.variants?.Count ?? 0}) {{
+                            edges {{
+                                node {{
+                                    id,
+                                    legacyResourceId,
+                                    sku
+                                }}
+                            }}
+                        }}
                     }},
                     userErrors {{
                         field,

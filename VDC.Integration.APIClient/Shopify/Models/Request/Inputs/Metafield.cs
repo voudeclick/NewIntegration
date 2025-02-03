@@ -6,6 +6,6 @@
         public string key { get; set; }
         public string value { get; set; }
         public string @namespace { get { return "VDC.Integration"; } }
-        public string type { get; set; }
+        public string valueType { get; set; }
     }
 }

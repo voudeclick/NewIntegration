@@ -1,13 +1,15 @@
 ﻿using Akka.Actor;
 using Akka.Event;
+using Akka.Util;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
@@ -40,6 +42,7 @@ using VDC.Integration.Domain.Models.GatewayNoteAttributes;
 using VDC.Integration.Domain.Shopify.Models.Request;
 using VDC.Integration.Domain.Shopify.Models.Results;
 using VDC.Integration.EntityFramework.Repositories;
+using static VDC.Integration.APIClient.Shopify.Models.Request.ProductVariantsBulkInput;
 using static VDC.Integration.Domain.Shopify.Models.Results.REST.OrderResult;
 using Order = VDC.Integration.APIClient.Shopify.Models.Request.Inputs.Order;
 using OrderResult = VDC.Integration.Domain.Shopify.Models.Results.REST.OrderResult;
@@ -163,7 +166,7 @@ namespace VDC.Integration.Application.Services
                         return new ReturnMessage { Result = Result.Error, Error = locationResult.Error };
                     }
 
-                    List<VariantCreateVariantsInput> variantes = null;
+                    List<Variant> variantes = null;
 
                     foreach (var activeSku in activeSkus)
                     {
@@ -176,35 +179,20 @@ namespace VDC.Integration.Application.Services
                             }
                         }
 
-                        var variante = new VariantCreateVariantsInput
+                        var variante = new Variant
                         {
+                            sku = activeSku.Sku,
+                            weight = activeSku.WeightInKG,
                             barcode = activeSku.Barcode,
+                            compareAtPrice = new Optional<decimal?>(activeSku.Price.CompareAtPrice),
                             price = activeSku.Price.Price,
-                            inventoryItem = new VariantUpdateVariantsInventoryItem
-                            {
-                                sku = activeSku.Sku,
-                                measurement = new VariantUpdateVariantsInventoryItemMeasurement
-                                {
-                                    weight = new VariantUpdateVariantsInventoryItemMeasurementWeight
-                                    {
-                                        unit = "KILOGRAMS",
-                                        value = activeSku.WeightInKG
-                                    }
-                                }
-                            },
-                            optionValues = new List<VariantUpdateVariantsOptionValue>
-                            {
-                                new VariantUpdateVariantsOptionValue
-                                {
-                                    linkedMetafieldValue = activeSku.Options.Count == 0 ? $"Default Title {activeSku.Sku.ToHashMD5().Truncate(6)}" : activeSku.Options[0],
-                                    name = activeSku.Options.Count == 0 ? $"Default Title {activeSku.Sku.ToHashMD5().Truncate(6)}" : activeSku.Options[0],
-                                    optionName = message.ProductInfo.OptionsName[0]
-                                }
-                            }
+                            options = activeSku.Options.Count == 0 ? new List<string> { $"Default Title {activeSku.Sku.ToHashMD5().Truncate(6)}" } : activeSku.Options,
+                            inventoryQuantities = FillInventory(activeSku, locationResult.Data.locations.edges),
+                            inventoryPolicy = activeSku.SellWithoutStock ? "CONTINUE" : "DENY"
                         };
 
                         if (variantes == null)
-                            variantes = new List<VariantCreateVariantsInput>();
+                            variantes = new List<Variant>();
 
                         variantes.Add(variante);
                     }
@@ -213,14 +201,14 @@ namespace VDC.Integration.Application.Services
                     {
                         input = new Product
                         {
-                            //published = message.ProductInfo.Status == null ? null : message.ProductInfo.Status.Value && !shopifyData.SetProductsAsUnpublished,
+                            published = message.ProductInfo.Status == null ? null : message.ProductInfo.Status.Value && !shopifyData.SetProductsAsUnpublished,
                             title = message.ProductInfo.Title,
                             descriptionHtml = shopifyData.BodyIntegrationType == BodyIntegrationType.Never ? null : GetBody(message.ProductInfo, shopifyData),
                             vendor = message.ProductInfo.Vendor,
-                            //options = message.ProductInfo.OptionsName,
+                            options = message.ProductInfo.OptionsName,
                             tags = FillProductTags(shopifyData, message.ProductInfo),
-                            metafields = GetProductMetafields(shopifyData, message.ProductInfo)
-                            //variants = variantes
+                            metafields = GetProductMetafields(shopifyData, message.ProductInfo),
+                            variants = variantes
                         }
                     };
 
@@ -258,23 +246,6 @@ namespace VDC.Integration.Application.Services
                         throw new Exception($"Error in create shopify product: {JsonSerializer.Serialize(createResult.Data.productCreate.userErrors)}");
 
                     productUpdateResult = createResult.Data.productCreate.product;
-
-
-                    ReturnMessage<VariantCreateMutationOutput> createVariantResult = await _apiActorGroup.Ask<ReturnMessage<VariantCreateMutationOutput>>(
-                        new VariantCreateMutation(new VariantCreateMutationInput
-                        {
-                            productId = productUpdateResult.id,
-                            variants = variantes
-                        }), cancellationToken);
-
-                    if (createVariantResult.Result == Result.Error)
-                    {
-                        _logger.Warning($"ShopifyService - Error in UpdateFullProduct | {createVariantResult.Error.Message}", Extensions.LoggingExtensions.FromService(Extensions.LoggingExtensions.GetCurrentMethod(), message, shopifyData));
-                        return new ReturnMessage { Result = Result.Error, Error = createVariantResult.Error };
-                    }
-
-                    if (createVariantResult.Data.productVariantsBulkCreate.userErrors?.Any() == true)
-                        throw new Exception($"Error in create shopify sku: {JsonSerializer.Serialize(createVariantResult.Data.productVariantsBulkCreate.userErrors)}");
 
                     _logger.Warning($"UpdateFullProduct(CreateProductInput) - TenantId: {shopifyData.Id} (logIdentify: {logIdentify} - Time: {momentOfTheProcess}) | createProductInput:{Newtonsoft.Json.JsonConvert.SerializeObject(createProductInput)}");
                 }
@@ -325,7 +296,7 @@ namespace VDC.Integration.Application.Services
                             //new sku
                             variants.Add(new Variant
                             {
-                              /*  sku = sku.Sku,
+                                sku = sku.Sku,
                                 weight = sku.WeightInKG,
                                 barcode = sku.Barcode,
                                 compareAtPrice = new Optional<decimal?>(sku.Price.CompareAtPrice),
@@ -339,7 +310,7 @@ namespace VDC.Integration.Application.Services
                                             availableQuantity = sku.Stock.Quantity,
                                             locationId = FillLocation(sku, locationId)
                                         }
-                                },*/
+                                },
                             });
                         }
                         else
@@ -347,14 +318,14 @@ namespace VDC.Integration.Application.Services
                             //update sku
                             variants.Add(new Variant
                             {
-                              /*  inventoryPolicy = sku.SellWithoutStock ? "CONTINUE" : "DENY",
+                                inventoryPolicy = sku.SellWithoutStock ? "CONTINUE" : "DENY",
                                 id = shopifyVariant.id,
                                 sku = sku.Sku,
                                 weight = sku.WeightInKG,
                                 barcode = sku.Barcode,
                                 compareAtPrice = new Optional<decimal?>(sku.Price.CompareAtPrice),
                                 price = sku.Price.Price,
-                                options = sku.Options.Count == 0 ? new List<string> { $"Default Title {sku.Sku.ToHashMD5().Truncate(6)}" } : sku.Options*/
+                                options = sku.Options.Count == 0 ? new List<string> { $"Default Title {sku.Sku.ToHashMD5().Truncate(6)}" } : sku.Options
                             });
 
                             InventoryLevelResult inventoryItem = default;
@@ -433,7 +404,7 @@ namespace VDC.Integration.Application.Services
 
                             var variante = new Variant
                             {
-                               /* sku = activeSku.Sku,
+                                sku = activeSku.Sku,
                                 weight = activeSku.WeightInKG,
                                 barcode = activeSku.Barcode,
                                 compareAtPrice = new Optional<decimal?>(activeSku.Price.CompareAtPrice),
@@ -447,7 +418,7 @@ namespace VDC.Integration.Application.Services
                                             availableQuantity = activeSku.Stock.Quantity,
                                             locationId = FillLocation(activeSku, locationId)
                                         }
-                                    }*/
+                                    }
                             };
 
                             if (variants == null)
@@ -534,7 +505,8 @@ namespace VDC.Integration.Application.Services
                     vendor = ProductInfo.Vendor,
                     options = optionPositionChanged == true ? optionsName : ProductInfo.OptionsName,
                     tags = FillProductTags(shopifyData, ProductInfo, currentData.tags),
-                    metafields = GetProductMetafields(shopifyData, ProductInfo, currentData)
+                    metafields = GetProductMetafields(shopifyData, ProductInfo, currentData),
+                    variants = variants
                 };
             }
             catch (Exception ex)
@@ -655,14 +627,14 @@ namespace VDC.Integration.Application.Services
                                 //update sku
                                 variants.Add(new Variant
                                 {
-                                  /*  id = shopifyVariant.id,
+                                    id = shopifyVariant.id,
                                     sku = sku.Sku,
                                     weight = sku.WeightInKG,
                                     barcode = sku.Barcode,
                                     price = sku.Price?.Price,
                                     compareAtPrice = new Optional<decimal?>(sku.Price?.CompareAtPrice),
                                     inventoryPolicy = sku.SellWithoutStock ? "CONTINUE" : "DENY",
-                                    options = sku.Options.Count == 0 ? new List<string> { $"Default Title {sku.Sku.ToHashMD5().Truncate(6)}" } : sku.Options*/
+                                    options = sku.Options.Count == 0 ? new List<string> { $"Default Title {sku.Sku.ToHashMD5().Truncate(6)}" } : sku.Options
                                 });
                             }
                         }
@@ -748,11 +720,9 @@ namespace VDC.Integration.Application.Services
                 Metafield productGroupingMetafield = null;
                 var currentGroupingMetafield = currentData?.metafields.edges.Select(x => x.node).FirstOrDefault(x => x.key == "ProductGroupingHandles");
                 if (currentGroupingMetafield == null)
-                    //productGroupingMetafield = new Metafield { key = "ProductGroupingHandles", valueType = "STRING" };
-                    productGroupingMetafield = new Metafield { key = "ProductGroupingHandles" };
+                    productGroupingMetafield = new Metafield { key = "ProductGroupingHandles", valueType = "STRING" };
                 else
-                    //productGroupingMetafield = new Metafield { id = currentGroupingMetafield.id, key = "ProductGroupingHandles", value = currentGroupingMetafield.value, valueType = "STRING" };
-                    productGroupingMetafield = new Metafield { id = currentGroupingMetafield.id, key = "ProductGroupingHandles", value = currentGroupingMetafield.value };
+                    productGroupingMetafield = new Metafield { id = currentGroupingMetafield.id, key = "ProductGroupingHandles", value = currentGroupingMetafield.value, valueType = "STRING" };
 
                 var handles = "|";
                 if (productGroupingMetafield.id == null || productGroupingMetafield.value != handles)
@@ -773,7 +743,7 @@ namespace VDC.Integration.Application.Services
 
                     shopifyMetafield.key = metafield.Key;
                     shopifyMetafield.value = metafield.Value;
-                    //shopifyMetafield.valueType = metafield.ValueType;
+                    shopifyMetafield.valueType = metafield.ValueType;
                     result.Add(shopifyMetafield);
                 }
             }
@@ -796,6 +766,7 @@ namespace VDC.Integration.Application.Services
         public async Task<ReturnMessage> UpdatePartialSku(ShopifyUpdatePartialSkuMessage message, ShopifyDataMessage shopifyData, QueueClient fullProductQueueClient, CancellationToken cancellationToken)
         {
             VariantResult currentData = null;
+            var productId = "";
 
             if (message.SkuInfo.ShopifyId.HasValue)
             {
@@ -844,6 +815,7 @@ namespace VDC.Integration.Application.Services
 
                     foreach (var sku in queryProductsBySkuResult.Data.productVariants.edges)
                     {
+                        productId = sku.node.product.id;
                         var externalId = SearchTagValue(sku.node.product.tags, Tags.ProductExternalId).FirstOrDefault();
                         if (!string.IsNullOrWhiteSpace(message.ExternalProductId) && externalId == message.ExternalProductId)
                         {
@@ -900,41 +872,45 @@ namespace VDC.Integration.Application.Services
                         }
                     }
 
-                    ReturnMessage<VariantUpdateMutationOutput> createResult = await _apiActorGroup.Ask<ReturnMessage<VariantUpdateMutationOutput>>(
-                           new VariantUpdateMutation(new VariantUpdateMutationInput
+                    ReturnMessage<ProductVariantsBulkMutationOutput> createResult = await _apiActorGroup.Ask<ReturnMessage<ProductVariantsBulkMutationOutput>>(
+                           new VariantUpdateMutation(new ProductVariantsBulkInput
                            {
-                                productId = currentData.product.id,
-                                variants = new List<VariantUpdateVariantsInput>
+                                productId = productId,
+                                variants = new List<ProductVariantsBulkVariantMutationInput>
                                 {
-                                    new VariantUpdateVariantsInput {
+                                    new ProductVariantsBulkVariantMutationInput
+                                    {
                                         id = currentData.id,
                                         barcode = message.SkuInfo.Barcode,
                                         price = message.SkuInfo.Price?.Price,
-                                        inventoryItem = new VariantUpdateVariantsInventoryItem
+                                        inventoryItem = new ProductVariantsBulkVariantInventoryItemMutationInput
                                         {
                                             sku = message.SkuInfo.Sku,
-                                            measurement = new VariantUpdateVariantsInventoryItemMeasurement
+                                            measurement = new ProductVariantsBulkVariantInventoryItemMeasurementMutationInput
                                             {
-                                                weight = new VariantUpdateVariantsInventoryItemMeasurementWeight
+                                                weight = new ProductVariantsBulkVariantInventoryItemMeasurementWeightMutationInput
                                                 {
                                                     unit = "KILOGRAMS",
                                                     value = message.SkuInfo.WeightInKG
                                                 }
                                             }
-                                        }/*,
-                                        optionValues = new List<VariantUpdateVariantsOptionValue>
+                                        },
+                                        optionValues = new List<ProductVariantsBulkVariantInventoryOptionValuesInput>
                                         {
-                                            new VariantUpdateVariantsOptionValue
+                                            new ProductVariantsBulkVariantInventoryOptionValuesInput
                                             {
-                                                linkedMetafieldValue = "",
-                                                name = activeSku.Options.Count == 0 ? new List<string> { $"Default Title {activeSku.Sku.ToHashMD5().Truncate(6)}" } : activeSku.Options,,
-
-                                                optionName = ""
+                                                linkedMetafieldValue = message.SkuInfo?.Options[0],
+                                                name = message.SkuInfo?.Options[0],
+                                                optionName = message.SkuInfo?.OptionsName[0]
                                             }
-                                        }*/
+                                        }
                                     }
                                 }
                            }), cancellationToken);
+                    /*input = new Variant
+                        {
+                            options = message.SkuInfo.Options.Count == 0 ? new List<string> { $"Default Title {message.SkuInfo.Sku.ToHashMD5().Truncate(6)}" } : message.SkuInfo.Options
+                        }*/
 
                     if (createResult.Result == Result.Error)
                     {
@@ -942,8 +918,8 @@ namespace VDC.Integration.Application.Services
                         return new ReturnMessage { Result = Result.Error, Error = createResult.Error };
                     }
 
-                    if (createResult.Data.productVariantsBulkUpdate.userErrors?.Any() == true)
-                        throw new Exception($"Error in update shopify sku: {JsonSerializer.Serialize(createResult.Data.productVariantsBulkUpdate.userErrors)}");
+                    if (createResult.Data.userErrors?.Any() == true)
+                        throw new Exception($"Error in update shopify sku: {JsonSerializer.Serialize(createResult.Data.userErrors)}");
                 }
                 else
                 {
@@ -1000,20 +976,20 @@ namespace VDC.Integration.Application.Services
             }
             else
             {
-                var createResult = await _apiActorGroup.Ask<ReturnMessage<VariantUpdateMutationOutput>>(
-                       new VariantUpdateMutation(new VariantUpdateMutationInput
-                       {
-                            productId = currentData.product.id,
-                            variants = new List<VariantUpdateVariantsInput>
-                            {
-                                new VariantUpdateVariantsInput
-                                {
-                                    id = currentData.id,
-                                    price = message.Value.Price,
-                                }
 
+                ReturnMessage<ProductVariantsBulkMutationOutput> createResult = await _apiActorGroup.Ask<ReturnMessage<ProductVariantsBulkMutationOutput>>(
+                   new VariantUpdateMutation(new ProductVariantsBulkInput
+                   {
+                        productId = "",
+                        variants = new List<ProductVariantsBulkVariantMutationInput>
+                        {
+                            new ProductVariantsBulkVariantMutationInput
+                            {
+                                id = currentData.id,
+                                price = message.Value.Price
                             }
-                       }), cancellationToken);
+                        }
+                   }), cancellationToken);
 
                 if (createResult.Result == Result.Error)
                 {
@@ -1021,8 +997,8 @@ namespace VDC.Integration.Application.Services
                     return new ReturnMessage { Result = Result.Error, Error = createResult.Error };
                 }
 
-                if (createResult.Data.productVariantsBulkUpdate.userErrors?.Any() == true)
-                    throw new Exception($"Error in update shopify price: {JsonSerializer.Serialize(createResult.Data.productVariantsBulkUpdate.userErrors)}");
+                if (createResult.Data.userErrors?.Any() == true)
+                    throw new Exception($"Error in update shopify price: {JsonSerializer.Serialize(createResult.Data.userErrors)}");
             }
             return new ReturnMessage { Result = Result.OK };
         }
@@ -1146,25 +1122,14 @@ namespace VDC.Integration.Application.Services
                 if (message.Value.Quantity != inventoryItem.quantities[0].quantity)
                 {
                     var createResult = await _apiActorGroup.Ask<ReturnMessage<InventoryUpdateMutationOutput>>(
-                           new InventorySetQuantitiesMutation(new InventorySetQuantitiesInput
+                           new InventoryUpdateMutation(new InventoryUpdateMutationInput
                            {
                                input = new InventoryLevel
                                {
-                                   ignoreCompareQuantity = true,
-                                   reason = "correction",
-                                   name = "available",
-                                   quantities = new List<inventoryAdjustChange>
-                                    {
-                                        new inventoryAdjustChange
-                                        {
-                                            inventoryItemId = currentData.inventoryItem?.id,
-                                            locationId = inventoryItem.location?.id,
-                                            //quantity = message.Value.DecreaseStock
-                                            //        ? -message.Value.Quantity
-                                            //        : message.Value.Quantity - inventoryItem.quantities[0].quantity
-                                            quantity = message.Value.Quantity
-                                        }
-                                    }
+                                   inventoryLevelId = inventoryItem.id,
+                                   availableDelta = message.Value.DecreaseStock
+                                    ? -message.Value.Quantity
+                                    : message.Value.Quantity - inventoryItem.quantities[0].quantity
                                }
                            }), cancellationToken);
 
@@ -1328,8 +1293,8 @@ namespace VDC.Integration.Application.Services
                         {
                             input = new Product
                             {
-                                id = currentData.id//,
-                                //images = new List<Image>() //clean all images
+                                id = currentData.id,
+                                images = new List<Image>() //clean all images
                             }
                         }), cancellationToken);
 
@@ -1339,8 +1304,8 @@ namespace VDC.Integration.Application.Services
                 {
                     input = new Product
                     {
-                        id = currentData.id//,
-                        //images = new List<Image>() //clean all images
+                        id = currentData.id,
+                        images = new List<Image>() //clean all images
                     }
                 }, shopifyData));
                 return new ReturnMessage { Result = Result.Error, Error = clearResult.Error };
@@ -1400,13 +1365,13 @@ namespace VDC.Integration.Application.Services
                         {
                             input = new Product
                             {
-                                id = currentData.id/*,
+                                id = currentData.id,
                                 variants = currentData.variants.edges.Select(v => new Variant
                                 {
                                     compareAtPrice = new Optional<decimal?>(v.node.compareAtPrice),
                                     id = v.node.id,
                                     imageId = imagesIds.ContainsKey(v.node.sku) ? imagesIds[v.node.sku] : null
-                                }).ToList()*/
+                                }).ToList()
                             }
                         }), cancellationToken);
 
@@ -1416,13 +1381,13 @@ namespace VDC.Integration.Application.Services
                 {
                     input = new Product
                     {
-                        id = currentData.id/*,
+                        id = currentData.id,
                         variants = currentData.variants.edges.Select(v => new Variant
                         {
                             compareAtPrice = new Optional<decimal?>(v.node.compareAtPrice),
                             id = v.node.id,
                             imageId = imagesIds.ContainsKey(v.node.sku) ? imagesIds[v.node.sku] : null
-                        }).ToList()*/
+                        }).ToList()
                     }
                 }, shopifyData));
                 return new ReturnMessage { Result = Result.Error, Error = updateResult.Error };
@@ -1857,7 +1822,7 @@ namespace VDC.Integration.Application.Services
         }
 
 
-        /*private (string, string) GetCustomerName(OrderResult.Order currentOrder)
+        private (string, string) GetCustomerName(OrderResult.Order currentOrder)
         {
             var firstName = string.IsNullOrWhiteSpace(currentOrder?.customer?.first_name) ? currentOrder?.customer?.default_address?.first_name : currentOrder?.customer?.first_name;
             var lastName = string.IsNullOrWhiteSpace(currentOrder?.customer?.last_name) ? currentOrder?.customer?.default_address?.last_name : currentOrder?.customer?.last_name;
@@ -1869,7 +1834,7 @@ namespace VDC.Integration.Application.Services
             }
 
             return (string.IsNullOrWhiteSpace(firstName) ? currentOrder.shipping_address.first_name : firstName, string.IsNullOrWhiteSpace(lastName) ? currentOrder.shipping_address.last_name : lastName);
-        }*/
+        }
 
         private async Task<List<NoteAttribute>> GetNoteAttributes(string gateway, string checkoutId)
         {
@@ -2785,16 +2750,16 @@ namespace VDC.Integration.Application.Services
             };
         }
 
-        /*private List<Metafield> MergeMetafields(List<Metafield> update, Connection<MetafieldResult> current)
+        private List<Metafield> MergeMetafields(List<Metafield> update, Connection<MetafieldResult> current)
         {
             foreach (var metaField in update)
             {
                 metaField.id = current.edges?.Where(m => m.node.key == metaField.key).Select(m => m.node.id).FirstOrDefault();
             }
             return update;
-        }*/
+        }
 
-        /*private List<InventoryQuantity> FillInventory(Domain.Models.Product.SkuInfo sku, List<Edges<LocationResult>> shopifyLocations)
+        private List<InventoryQuantity> FillInventory(Domain.Models.Product.SkuInfo sku, List<Edges<LocationResult>> shopifyLocations)
         {
             var inventories = new List<InventoryQuantity>();
 
@@ -2832,9 +2797,9 @@ namespace VDC.Integration.Application.Services
             });
 
             return inventories;
-        }*/
+        }
 
-        /*private string FillLocation(Domain.Models.Product.SkuInfo sku, string locationId)
+        private string FillLocation(Domain.Models.Product.SkuInfo sku, string locationId)
         {
             var newLocationId = locationId;
 
@@ -2851,7 +2816,7 @@ namespace VDC.Integration.Application.Services
 
             return newLocationId;
 
-        }*/
+        }
 
         public async Task<ReturnMessage> SendProductKitToUpdate(ShopifyUpdateProductKitMessage message,
                                                                  QueueClient fullProductQueueClient,
@@ -2894,7 +2859,7 @@ namespace VDC.Integration.Application.Services
             return new ReturnMessage { Result = Result.OK };
         }
 
-       /* private async Task SendProductToUpdateStockKit(ShopifyUpdateStockMessage message,
+        private async Task SendProductToUpdateStockKit(ShopifyUpdateStockMessage message,
                                                        QueueClient updateStockKitQueue,
                                                        CancellationToken cancellationToken)
         {
@@ -2937,8 +2902,8 @@ namespace VDC.Integration.Application.Services
 
             await Task.WhenAll(sendMessages);
 
-        }*/
-        /*public async Task<bool> ValidAndReturnProductKit(OrderResult.Order order, ShopifyDataMessage shopifyData, QueueClient updateOrderTagNumber, QueueClient updateStockQueueClient, CancellationToken cancellationToken = default)
+        }
+        public async Task<bool> ValidAndReturnProductKit(OrderResult.Order order, ShopifyDataMessage shopifyData, QueueClient updateOrderTagNumber, QueueClient updateStockQueueClient, CancellationToken cancellationToken = default)
         {
             var itemsToRemove = new List<long>();
             var itemsToInsert = new List<OrderResult.LineItem>();
@@ -3019,9 +2984,9 @@ namespace VDC.Integration.Application.Services
             }
 
             return false;
-        }*/
+        }
 
-        /*public async Task ProcessStockProductKit(ShopifyDataMessage shopifyData, (OrderResult.Order order, ProductResult product) order, QueueClient updateOrderTagNumber, QueueClient updateStockQueueClient, CancellationToken cancellationToken = default)
+        public async Task ProcessStockProductKit(ShopifyDataMessage shopifyData, (OrderResult.Order order, ProductResult product) order, QueueClient updateOrderTagNumber, QueueClient updateStockQueueClient, CancellationToken cancellationToken = default)
         {
 
             if (shopifyData.EnableStockProductKit)
@@ -3056,7 +3021,7 @@ namespace VDC.Integration.Application.Services
                         .GetMessage(o))));
                 }
             }
-        }*/
+        }
 
         private List<string> FillProductTags(ShopifyDataMessage shopifyData, Domain.Models.Product.Info productInfo, List<string> currentTags = null)
         {
