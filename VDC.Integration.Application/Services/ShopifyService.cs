@@ -1178,8 +1178,6 @@ namespace VDC.Integration.Application.Services
             if (inventoryItem == null)
                 throw new Exception($"no inventoryitem in variant {currentData.legacyResourceId} sku:{message.Sku}");
 
-
-
             var tagsWithStock = currentData.tags.Where(x => x.StartsWith(Tags.GetProductKitSku(message.Sku))).ToList()
                 .Select(x => Tags.ProductKitSkuWithStock(message.Sku, message.Quantity)).ToList();
 
