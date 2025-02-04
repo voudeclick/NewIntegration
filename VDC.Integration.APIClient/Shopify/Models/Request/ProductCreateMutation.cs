@@ -4,9 +4,9 @@ using VDC.Integration.Domain.Shopify.Models.Results;
 
 namespace VDC.Integration.APIClient.Shopify.Models.Request
 {
-    public class ProductCreateMutation : BaseMutation<ProductCreateMutationInput, ProductCreateMutationOutput>
+    public class ProductCreateMutation : BaseMutation<ProductCreateInput, ProductCreateOutput>
     {
-        public ProductCreateMutation(ProductCreateMutationInput variables)
+        public ProductCreateMutation(ProductCreateInput variables)
             : base(variables)
         {
         }
@@ -14,21 +14,10 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
         public override string GetQuery()
         {
             return $@"
-                mutation productCreate($input: ProductInput!) {{
-                  productCreate(input: $input) {{
+                mutation CreateProductWithNewMedia($product: ProductCreateInput!, $media: [CreateMediaInput!]!) {{
+                  productCreate(product: $product, media: $media) {{
                     product {{
-                        id,
-                        legacyResourceId,
-                        handle,
-                        variants(first: {Variables.input.variants.Count}) {{
-                            edges {{
-                                node {{
-                                    id,
-                                    legacyResourceId,
-                                    sku
-                                }}
-                            }}
-                        }}
+                        id
                     }},
                     userErrors {{
                         field,
@@ -36,16 +25,34 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
                     }}
                   }}
                 }}
+            
             ";
         }
     }
 
-    public class ProductCreateMutationInput : BaseMutationInput
+    public class ProductCreateInput : BaseMutationInput
     {
-        public Product input { get; set; }
+        public ProductCreateProductInput product {  get; set; }
+        public List<ProductCreateMediaInput> media { get; set; }
+
+        public class ProductCreateProductInput
+        {
+            public string title { get; set; }
+            public string descriptionHtml { get; set; }
+            public string vendor { get; set; }
+            //public List<string> productOptions { get; set; }
+            public List<string> tags { get; set; }
+            public List<Metafield> metafields { get; set; }
+        }
+
+        public class ProductCreateMediaInput
+        {
+            public string mediaContentType { get; set; }
+            public string originalSource { get; set; }
+        }
     }
 
-    public class ProductCreateMutationOutput : BaseMutationOutput
+    public class ProductCreateOutput : BaseMutationOutput
     {
         public Result productCreate { get; set; }
 

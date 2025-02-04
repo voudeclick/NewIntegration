@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VDC.Integration.APIClient.Shopify.Models.Request.Inputs;
 using VDC.Integration.Domain.Shopify.Models.Results;
 
@@ -19,6 +20,21 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
                     product {{
                         id
                     }},
+                    productVariants {{
+                        id
+                        inventoryItem {{
+                            id
+                            inventoryLevels (first: 2) {{
+                                edges {{
+                                    node {{
+                                        location {{
+                                            id
+                                        }}
+                                    }}
+                                }}
+                            }}
+                        }}
+                    }}
                     userErrors {{
                         field,
                         message
@@ -47,6 +63,7 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
         {
             public string sku { get; set; }
             public ProductVariantsBulkVariantInventoryItemMeasurementMutationInput measurement { get; set; }
+            public Boolean tracked { get; set; }
         }
 
         public class ProductVariantsBulkVariantInventoryItemMeasurementMutationInput
@@ -70,10 +87,36 @@ namespace VDC.Integration.APIClient.Shopify.Models.Request
 
     public class ProductVariantsBulkMutationOutput : BaseMutationOutput
     {
-        public ProductVariantsBulkProductMutationOutput product { get; set; }
-        public List<UserError> userErrors { get; set; }
+        public ProductVariantsBulkUpdate productVariantsBulkUpdate { get; set; }
+        public class ProductVariantsBulkUpdate
+        {
+            public ProductVariantsBulkProductMutationOutput product { get; set; }
+            public List<ProductVariantsBulkProductVariantsMutationOutput> productVariants { get; set; }
+            public List<UserError> userErrors { get; set; }
+        }
 
         public class ProductVariantsBulkProductMutationOutput
+        {
+            public string id { get; set; }
+        }
+        public class ProductVariantsBulkProductVariantsMutationOutput
+        {
+            public string id { get; set; }
+            public ProductVariantsBulkProductVariantsInventoryItemMutationOutput inventoryItem { get; set; }
+        }
+
+        public class ProductVariantsBulkProductVariantsInventoryItemMutationOutput
+        {
+            public string id { get; set; }
+            public Connection<ProductVariantsBulkProductVariantsInventoryLevelsMutationOutput> inventoryLevels { get; set; }
+        }
+
+        public class ProductVariantsBulkProductVariantsInventoryLevelsMutationOutput
+        {
+            public ProductVariantsBulkProductVariantsLocationMutationOutput location { get; set; }
+        }
+
+        public class ProductVariantsBulkProductVariantsLocationMutationOutput
         {
             public string id { get; set; }
         }

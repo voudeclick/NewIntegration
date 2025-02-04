@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.Linq;
@@ -42,7 +43,10 @@ using VDC.Integration.Domain.Models.GatewayNoteAttributes;
 using VDC.Integration.Domain.Shopify.Models.Request;
 using VDC.Integration.Domain.Shopify.Models.Results;
 using VDC.Integration.EntityFramework.Repositories;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 using static VDC.Integration.APIClient.Shopify.Models.Request.InventorySetQuantitiesInput;
+using static VDC.Integration.APIClient.Shopify.Models.Request.ProductCreateInput;
+using static VDC.Integration.APIClient.Shopify.Models.Request.ProductOptionCreateMutationInput;
 using static VDC.Integration.APIClient.Shopify.Models.Request.ProductVariantsBulkInput;
 using static VDC.Integration.Domain.Shopify.Models.Results.REST.OrderResult;
 using Order = VDC.Integration.APIClient.Shopify.Models.Request.Inputs.Order;
@@ -198,21 +202,19 @@ namespace VDC.Integration.Application.Services
                         variantes.Add(variante);
                     }
 
-                    var createProductInput = new ProductCreateMutationInput
+                    ProductCreateInput createProductInput = new ProductCreateInput
                     {
-                        input = new Product
+                        product = new ProductCreateProductInput
                         {
-                            published = message.ProductInfo.Status == null ? null : message.ProductInfo.Status.Value && !shopifyData.SetProductsAsUnpublished,
                             title = message.ProductInfo.Title,
                             descriptionHtml = shopifyData.BodyIntegrationType == BodyIntegrationType.Never ? null : GetBody(message.ProductInfo, shopifyData),
                             vendor = message.ProductInfo.Vendor,
-                            options = message.ProductInfo.OptionsName,
                             tags = FillProductTags(shopifyData, message.ProductInfo),
-                            metafields = GetProductMetafields(shopifyData, message.ProductInfo),
-                            variants = variantes
-                        }
+                            metafields = GetProductMetafields(shopifyData, message.ProductInfo)
+                        },
+                        media = new List<ProductCreateMediaInput> {}
                     };
-
+                                        
                     var json = JsonSerializer.Serialize(createProductInput);
 
                     var process = new ShopifyListOrderProcess()
@@ -224,7 +226,7 @@ namespace VDC.Integration.Application.Services
                         Exception = $"Produto - {message.ProductInfo.ExternalId}",
                         ShopifyResult = json
                     };
-
+                    /*
                     try
                     {
                         await _shopifyListOrderProcessRepository.Save(process);
@@ -233,9 +235,10 @@ namespace VDC.Integration.Application.Services
                     {
                         var tt = ex;
                     }
-
-                    var createResult = await _apiActorGroup.Ask<ReturnMessage<ProductCreateMutationOutput>>(
-                        new ProductCreateMutation(createProductInput), cancellationToken);
+                    */
+                    // Create Product
+                    ReturnMessage <ProductCreateOutput> createResult = await _apiActorGroup.Ask<ReturnMessage<ProductCreateOutput>>(
+                           new ProductCreateMutation(createProductInput), cancellationToken);
 
                     if (createResult.Result == Result.Error)
                     {
@@ -248,7 +251,127 @@ namespace VDC.Integration.Application.Services
 
                     productUpdateResult = createResult.Data.productCreate.product;
 
-                    _logger.Warning($"UpdateFullProduct(CreateProductInput) - TenantId: {shopifyData.Id} (logIdentify: {logIdentify} - Time: {momentOfTheProcess}) | createProductInput:{Newtonsoft.Json.JsonConvert.SerializeObject(createProductInput)}");
+                    // Create Option
+                    ReturnMessage<ProductOptionCreateMutationOutput> createOptionCreateResult = await _apiActorGroup.Ask<ReturnMessage<ProductOptionCreateMutationOutput>>(
+                       new ProductOptionCreateMutation(new ProductOptionCreateMutationInput
+                       {
+                           productId = productUpdateResult.id,
+                           options = new List<ProductOptionCreateOptionMutationInput>
+                            {
+                                new ProductOptionCreateOptionMutationInput
+                                {
+                                    name = message.ProductInfo.OptionsName[0],
+                                    values = new List<ProductOptionCreateOptionValueMutationInput>
+                                    {
+                                        new ProductOptionCreateOptionValueMutationInput
+                                        {
+                                            name = message.ProductInfo?.Variants[0]?.Options[0]
+                                        }
+                                    }
+                                }
+                            }
+                       }), cancellationToken);
+
+
+                    if (createOptionCreateResult.Result == Result.Error)
+                    {
+                        _logger.Warning($"ShopifyService - Error in CreateOption | {createOptionCreateResult.Error.Message}", Extensions.LoggingExtensions.FromService(Extensions.LoggingExtensions.GetCurrentMethod(), message, shopifyData));
+                        return new ReturnMessage { Result = Result.Error, Error = createOptionCreateResult.Error };
+                    }
+
+                    if (createOptionCreateResult.Data.productOptionsCreate.userErrors?.Any() == true)
+                        throw new Exception($"Error in create option shopify sku: {JsonSerializer.Serialize(createOptionCreateResult.Data.productOptionsCreate.userErrors)}");
+
+                    var variantId = createOptionCreateResult.Data.productOptionsCreate?.product?.variants?.edges[0]?.node?.id;
+                    
+                    // Update Variant
+                    ReturnMessage<ProductVariantsBulkMutationOutput> createVariantCreateResult = await _apiActorGroup.Ask<ReturnMessage<ProductVariantsBulkMutationOutput>>(
+                       new VariantUpdateMutation(new ProductVariantsBulkInput
+                       {
+                           productId = productUpdateResult.id,
+                           variants = new List<ProductVariantsBulkVariantMutationInput>
+                            {
+                                new ProductVariantsBulkVariantMutationInput
+                                {
+                                    id = variantId,
+                                    barcode = message.ProductInfo?.Variants[0]?.Barcode,
+                                    price = message.ProductInfo?.Variants[0]?.Price?.Price,
+                                    inventoryItem = new ProductVariantsBulkVariantInventoryItemMutationInput
+                                    {
+                                        sku = message.ProductInfo?.Variants[0]?.Sku,
+                                        measurement = new ProductVariantsBulkVariantInventoryItemMeasurementMutationInput
+                                        {
+                                            weight = new ProductVariantsBulkVariantInventoryItemMeasurementWeightMutationInput
+                                            {
+                                                unit = "KILOGRAMS",
+                                                value = message.ProductInfo?.Variants[0]?.WeightInKG
+                                            }
+                                        },
+                                        tracked = true
+                                    },
+                                    optionValues = new List<ProductVariantsBulkVariantInventoryOptionValuesInput>
+                                    {
+                                        new ProductVariantsBulkVariantInventoryOptionValuesInput
+                                        {
+                                            linkedMetafieldValue = message.ProductInfo?.Variants[0]?.Options[0],
+                                            name = message.ProductInfo?.Variants[0]?.Options[0],
+                                            optionName = message.ProductInfo.OptionsName[0]
+                                        }
+                                    }
+                                }
+                            }
+                       }), cancellationToken);
+
+
+                    if (createVariantCreateResult.Result == Result.Error)
+                    {
+                        _logger.Warning($"ShopifyService - Error in UpdateVariant | {createVariantCreateResult.Error.Message}", Extensions.LoggingExtensions.FromService(Extensions.LoggingExtensions.GetCurrentMethod(), message, shopifyData));
+                        return new ReturnMessage { Result = Result.Error, Error = createVariantCreateResult.Error };
+                    }
+
+                    if (createVariantCreateResult.Data.productVariantsBulkUpdate.userErrors?.Any() == true)
+                        throw new Exception($"Error in update variant shopify sku: {JsonSerializer.Serialize(createVariantCreateResult.Data.productVariantsBulkUpdate.userErrors)}");
+
+                    var inventoryId = createVariantCreateResult.Data.productVariantsBulkUpdate.productVariants[0]?.inventoryItem?.id;
+                    var locationId = createVariantCreateResult.Data.productVariantsBulkUpdate.productVariants[0]?.inventoryItem?.inventoryLevels?.edges[0]?.node?.location?.id;
+
+                    ReturnMessage<InventorySetMutationOutput> createResultInventorySet = await _apiActorGroup.Ask<ReturnMessage<InventorySetMutationOutput>>(
+                       new InventorySetQuantitiesMutation(new InventorySetQuantitiesInput
+                       {
+                           input = new InventorySetQuantitiesInputInput
+                           {
+                               ignoreCompareQuantity = true,
+                               reason = "correction",
+                               name = "available",
+                               quantities = new List<InventorySetQuantitiesInputInputQuantities>
+                                {
+                                    new InventorySetQuantitiesInputInputQuantities
+                                    {
+                                        inventoryItemId = inventoryId,
+                                        locationId = locationId,
+                                        quantity = message.ProductInfo?.Variants[0]?.Stock?.Quantity
+                                    }
+                                }
+                           }
+                       }), cancellationToken);
+
+                    if (createResultInventorySet.Result == Result.Error)
+                    {
+                        var errorMessage = new ReturnMessage { Result = Result.Error, Error = createResultInventorySet.Error };
+                        _logger.Warning($"ShopifyService - Error in UpdateStock | {createResultInventorySet.Error.Message}", Extensions.LoggingExtensions.FromService(Extensions.LoggingExtensions.GetCurrentMethod(), message, shopifyData,
+                                    $"Error when updating inventory for sku - {message.ProductInfo.SkuOriginal}"));
+                        return errorMessage;
+                    }
+
+                    if (createResultInventorySet.Data.inventorySetQuantities.userErrors?.Any() == true)
+                    {
+                        var errormessage = $"TenantId: {shopifyData.Id} - Error in update shopify stock: {JsonSerializer.Serialize(createResultInventorySet.Data.inventorySetQuantities.userErrors)}";
+                        _logger.Warning(errormessage);
+                        throw new Exception(errormessage);
+                    }
+
+                    _logger.Warning($"UpdateFullProduct(UpdateProductInput) - TenantId: {shopifyData.Id} (logIdentify: {logIdentify} - Time: {momentOfTheProcess}) | " +
+                        $"updateProductInput:{Newtonsoft.Json.JsonConvert.SerializeObject(createProductInput)}");
                 }
             }
             else
@@ -919,8 +1042,8 @@ namespace VDC.Integration.Application.Services
                         return new ReturnMessage { Result = Result.Error, Error = createResult.Error };
                     }
 
-                    if (createResult.Data.userErrors?.Any() == true)
-                        throw new Exception($"Error in update shopify sku: {JsonSerializer.Serialize(createResult.Data.userErrors)}");
+                    if (createResult.Data.productVariantsBulkUpdate.userErrors?.Any() == true)
+                        throw new Exception($"Error in update shopify sku: {JsonSerializer.Serialize(createResult.Data.productVariantsBulkUpdate.userErrors)}");
                 }
                 else
                 {
@@ -998,8 +1121,8 @@ namespace VDC.Integration.Application.Services
                     return new ReturnMessage { Result = Result.Error, Error = createResult.Error };
                 }
 
-                if (createResult.Data.userErrors?.Any() == true)
-                    throw new Exception($"Error in update shopify price: {JsonSerializer.Serialize(createResult.Data.userErrors)}");
+                if (createResult.Data.productVariantsBulkUpdate.userErrors?.Any() == true)
+                    throw new Exception($"Error in update shopify price: {JsonSerializer.Serialize(createResult.Data.productVariantsBulkUpdate.userErrors)}");
             }
             return new ReturnMessage { Result = Result.OK };
         }
