@@ -445,7 +445,7 @@ namespace VDC.Integration.Application.Services
                                         new ConsultarPedidoOmieRequest(
                                             new ConsultarPedidoOmieRequestInput
                                             {
-                                                codigo_pedido_integracao = message.ExternalID
+                                                codigo_pedido_integracao = message.Name
                                             }
                                         ), cancellationToken
                                     );
@@ -788,7 +788,7 @@ namespace VDC.Integration.Application.Services
                 {
                     cabecalho = new IncluirPedidoOmieRequestInput.Cabecalho
                     {
-                        codigo_pedido_integracao = message.ExternalID,
+                        codigo_pedido_integracao = message.Name,
                         origem_pedido = "API",
                         quantidade_itens = message.Items.Count(),
                         codigo_cliente = updateClientResult.Data.codigo_cliente_omie,
