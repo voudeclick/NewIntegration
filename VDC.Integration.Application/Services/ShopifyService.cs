@@ -687,7 +687,9 @@ namespace VDC.Integration.Application.Services
             {
                 //new product
                 if (message.ProductInfo.Status == true)
+                {
                     await SendListFullProductMessage(message.ProductInfo.ExternalId, fullProductQueueClient);
+                }
 
             }
             else if (ProductVendorChanged(message.ProductInfo, currentData))

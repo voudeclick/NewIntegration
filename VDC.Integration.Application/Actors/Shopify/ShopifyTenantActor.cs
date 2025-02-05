@@ -29,7 +29,7 @@ namespace VDC.Integration.Application.Actors.Shopify
 {
     public class ShopifyTenantActor : BaseShopifyTenantActor
     {
-        private readonly int _maximumRetryCount = 3;
+        private readonly int _maximumRetryCount = 10;
         private readonly IServiceProvider _serviceProvider;
         private readonly CancellationToken _webJobCancellationToken;
         private CancellationTokenSource _taskCancellationTokenSource;
