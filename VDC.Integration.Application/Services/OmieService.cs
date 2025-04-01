@@ -878,6 +878,34 @@ namespace VDC.Integration.Application.Services
                 }
             }
 
+            var enderecoCliente = message?.NoteAttributes?.FirstOrDefault(w => w.Name == "shipping_street_name")?.Value?.Truncate(60);
+            if (enderecoCliente == null)
+                enderecoCliente = message.Customer.BillingAddress.Address.Truncate(60);
+
+            var numeroCliente = message?.NoteAttributes?.FirstOrDefault(w => w.Name == "shipping_street_number")?.Value?.Truncate(10);
+            if (numeroCliente == null)
+                numeroCliente = message.Customer.BillingAddress.Number.Truncate(10);
+
+            var complementoCliente = message?.NoteAttributes?.FirstOrDefault(w => w.Name == "shipping_street_complement")?.Value?.Truncate(60);
+            if (complementoCliente == null)
+                complementoCliente = message.Customer.BillingAddress.Complement?.Truncate(60);
+
+            var bairroCliente = message?.NoteAttributes?.FirstOrDefault(w => w.Name == "shipping_neighborhood")?.Value;
+            if (bairroCliente == null)
+                bairroCliente = message.Customer.BillingAddress.District;
+
+            var cidadeCliente = message?.NoteAttributes?.FirstOrDefault(w => w.Name == "additional_info_shipping_city")?.Value;
+            if (cidadeCliente == null)
+                cidadeCliente = message.Customer.BillingAddress.City;
+
+            var estadoCliente = message?.NoteAttributes?.FirstOrDefault(w => w.Name == "additional_info_shipping_province")?.Value;
+            if (estadoCliente == null)
+                estadoCliente = message.Customer.BillingAddress.State;
+
+            var cepCliente = message?.NoteAttributes?.FirstOrDefault(w => w.Name == "additional_info_shipping_zipcode")?.Value;
+            if (cepCliente == null)
+                cepCliente = message.Customer.BillingAddress.ZipCode;
+
             var client = new UpsertClienteOmieRequestInput
             {
                 codigo_cliente_integracao = message.Customer.Company.CleanDocument(),
@@ -885,13 +913,13 @@ namespace VDC.Integration.Application.Services
                 cnpj_cpf = message.Customer.Company.CleanDocument(),
                 email = message.Customer.Email,
                 nome_fantasia = string.Concat(message.Customer.FirstName, " ", message.Customer.LastName),
-                estado = message.Customer.BillingAddress.State,
-                cidade = message.Customer.BillingAddress.City,
-                cep = message.Customer.BillingAddress.ZipCode,
-                bairro = message.Customer.BillingAddress.District,
-                endereco = message.Customer.BillingAddress.Address.Truncate(60),
-                endereco_numero = message.Customer.BillingAddress.Number.Truncate(10),
-                complemento = message.Customer.BillingAddress.Complement?.Truncate(60),
+                estado = estadoCliente,
+                cidade = cidadeCliente,
+                cep = cepCliente,
+                bairro = bairroCliente,
+                endereco = enderecoCliente,
+                endereco_numero = numeroCliente,
+                complemento = complementoCliente,
                 telefone1_ddd = message.Customer.BillingAddress.DDD,
                 telefone1_numero = message.Customer.BillingAddress.Phone
             };
