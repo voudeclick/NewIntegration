@@ -1012,6 +1012,7 @@ namespace VDC.Integration.Application.Services
                                         inventoryItem = new ProductVariantsBulkVariantInventoryItemMutationInput
                                         {
                                             sku = message.SkuInfo.Sku,
+                                            tracked = true,
                                             measurement = new ProductVariantsBulkVariantInventoryItemMeasurementMutationInput
                                             {
                                                 weight = new ProductVariantsBulkVariantInventoryItemMeasurementWeightMutationInput
